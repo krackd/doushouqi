@@ -1,6 +1,6 @@
 {
   "ver": "2.3.3",
-  "uuid": "40c36bae-66f6-4d0d-bafe-5ea58660f531",
+  "uuid": "6f247725-a18d-4a5d-a49b-65f9ee7c1308",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
@@ -9,18 +9,18 @@
   "packable": true,
   "platformSettings": {},
   "subMetas": {
-    "pixel-04": {
+    "GridCell": {
       "ver": "1.0.4",
-      "uuid": "7e6a28c2-0809-452f-a2df-0254f075112b",
-      "rawTextureUuid": "40c36bae-66f6-4d0d-bafe-5ea58660f531",
+      "uuid": "a4e20863-2f86-40b1-85c5-a02275778f7d",
+      "rawTextureUuid": "6f247725-a18d-4a5d-a49b-65f9ee7c1308",
       "trimType": "auto",
       "trimThreshold": 1,
       "rotated": false,
-      "offsetX": 4.5,
+      "offsetX": 0,
       "offsetY": 0,
-      "trimX": 9,
+      "trimX": 0,
       "trimY": 0,
-      "width": 55,
+      "width": 64,
       "height": 64,
       "rawWidth": 64,
       "rawHeight": 64,
