@@ -8,8 +8,10 @@
 //  - [Chinese] https://docs.cocos.com/creator/manual/zh/scripting/life-cycle-callbacks.html
 //  - [English] https://www.cocos2d-x.org/docs/creator/manual/en/scripting/life-cycle-callbacks.html
 
-const MOVE_DURATION = 0.2;
+const MOVE_DURATION = 0.01;
 const CELL_SIZE = 64;
+const MAP_HALF_HEIGHT = 4;
+const MAP_HALF_WIDTH = 3;
 
 cc.Class({
     extends: cc.Component,
@@ -71,18 +73,28 @@ cc.Class({
     },
 
     moveRight() {
-        this.node.runAction(cc.moveBy(MOVE_DURATION, cc.v2(CELL_SIZE, 0)));
+        // FIXME check collisions instead of checking positions
+        // TODO should check target position instead
+        if (this.node.x < MAP_HALF_WIDTH * CELL_SIZE) {
+            this.node.runAction(cc.moveBy(MOVE_DURATION, cc.v2(CELL_SIZE, 0)));
+        }
     },
     
     moveLeft() {
-        this.node.runAction(cc.moveBy(MOVE_DURATION, cc.v2(-CELL_SIZE, 0)));
+        if (this.node.x > -MAP_HALF_WIDTH * CELL_SIZE) {
+            this.node.runAction(cc.moveBy(MOVE_DURATION, cc.v2(-CELL_SIZE, 0)));
+        }
     },
     
     moveUp() {
-        this.node.runAction(cc.moveBy(MOVE_DURATION, cc.v2(0, CELL_SIZE)));
+        if (this.node.y < MAP_HALF_HEIGHT * CELL_SIZE) {
+            this.node.runAction(cc.moveBy(MOVE_DURATION, cc.v2(0, CELL_SIZE)));
+        }
     },
     
     moveDown() {
-        this.node.runAction(cc.moveBy(MOVE_DURATION, cc.v2(0, -CELL_SIZE)));
+        if (this.node.y > -MAP_HALF_HEIGHT * CELL_SIZE) {
+            this.node.runAction(cc.moveBy(MOVE_DURATION, cc.v2(0, -CELL_SIZE)));
+        }
     }
 });
