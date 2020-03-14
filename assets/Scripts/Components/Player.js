@@ -1,44 +1,40 @@
-// Learn cc.Class:
-//  - [Chinese] https://docs.cocos.com/creator/manual/zh/scripting/class.html
-//  - [English] http://docs.cocos2d-x.org/creator/manual/en/scripting/class.html
-// Learn Attribute:
-//  - [Chinese] https://docs.cocos.com/creator/manual/zh/scripting/reference/attributes.html
-//  - [English] http://docs.cocos2d-x.org/creator/manual/en/scripting/reference/attributes.html
-// Learn life-cycle callbacks:
-//  - [Chinese] https://docs.cocos.com/creator/manual/zh/scripting/life-cycle-callbacks.html
-//  - [English] https://www.cocos2d-x.org/docs/creator/manual/en/scripting/life-cycle-callbacks.html
-
 cc.Class({
     extends: cc.Component,
 
     properties: {
-        // foo: {
-        //     // ATTRIBUTES:
-        //     default: null,        // The default value will be used only when the component attaching
-        //                           // to a node for the first time
-        //     type: cc.SpriteFrame, // optional, default is typeof default
-        //     serializable: true,   // optional, default is true
-        // },
-        // bar: {
-        //     get () {
-        //         return this._bar;
-        //     },
-        //     set (value) {
-        //         this._bar = value;
-        //     }
-        // },
-        pawns: {
-            default: [],
-            type: cc.Pawn
+        selected: {
+            get () {
+                return this._selected;
+            },
+
+            set (value) {
+                this._selected = value;
+            }
         }
     },
 
     // LIFE-CYCLE CALLBACKS:
 
-    // onLoad () {},
+    onLoad () {
+        this.node.on(cc.Node.EventType.MOUSE_DOWN, this.onMouseDown, this);
+    },
 
-    start () {
+    onMouseDown(event) {
+        if (this.selected == null) {
+            return;
+        }
 
+        var viewPoint = cc.v2(event.getLocationX(), event.getLocationY());
+        var converted = this.node.convertToNodeSpaceAR(viewPoint);
+        var gridPos = cc.v2(converted.x / 64, converted.y / 64);
+        var gridPosRounded = cc.v2(Math.round(gridPos.x), Math.round(gridPos.y));
+        var target = cc.v2(gridPosRounded.x * 64, gridPosRounded.y * 64);
+
+        if (target.x != this.selected.x || target.y != this.selected.y) {
+            this.selected.x = target.x;
+            this.selected.y = target.y;
+            this.selected = null;
+        }
     },
 
     // update (dt) {},

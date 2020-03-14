@@ -13,6 +13,10 @@ const CELL_SIZE = 64;
 const MAP_HALF_HEIGHT = 4;
 const MAP_HALF_WIDTH = 3;
 
+const IDLE_OPACITY = 100;
+const HOVER_OPACITY = 200;
+const MOVE_OPACITY = 255;
+
 cc.Class({
     extends: cc.Component,
 
@@ -37,12 +41,48 @@ cc.Class({
     // LIFE-CYCLE CALLBACKS:
 
     onLoad() {
-        //add keyboard input listener to call turnLeft and turnRight
+        this.player = this.node.getParent().getComponent("Player");
+
+        // add keyboard input listener to call turnLeft and turnRight
         cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
+        this.node.on(cc.Node.EventType.MOUSE_ENTER, this.onMouseEnter, this);
+        this.node.on(cc.Node.EventType.MOUSE_LEAVE, this.onMouseLeave, this);
+        this.node.on(cc.Node.EventType.MOUSE_DOWN, this.onMouseDown, this);
+        this.node.on(cc.Node.EventType.MOUSE_UP, this.onMouseUp, this);
+
+        this.node.opacity = IDLE_OPACITY;
     },
 
     onDestroy() {
         cc.systemEvent.off(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
+    },
+
+    onMouseEnter(event) {
+        this.node.opacity = HOVER_OPACITY;
+    },
+    
+    onMouseLeave(event) {
+        this.node.opacity = IDLE_OPACITY;
+        this.node.off(cc.Node.EventType.MOUSE_MOVE, this.move, this);
+    },
+    
+    onMouseDown(event) {
+        this.node.opacity = MOVE_OPACITY;
+        this.node.on(cc.Node.EventType.MOUSE_MOVE, this.move, this);
+        this.player.selected = this.node;
+    },
+    
+    onMouseUp(event) {
+        this.node.opacity = IDLE_OPACITY;
+        this.node.off(cc.Node.EventType.MOUSE_MOVE, this.move, this);
+        if (this._callback) {
+            this._callback();
+        }
+    },
+    
+    move(event) {
+        this.node.x += event.getDelta().x;
+        this.node.y += event.getDelta().y;
     },
 
     onKeyDown(event) {
