@@ -45,10 +45,17 @@ cc.Class({
         tilePos.x = Math.floor(event.getLocationInView().x / this.tilemap.getTileSize().width); 
         tilePos.y = Math.floor(event.getLocationInView().y / this.tilemap.getTileSize().height); 
 
-        var collisionsLayer = this.tilemap.getLayer("Collisions");
-        cc.log("pos: " + tilePos);
+        var groundGID = this.tilemap.getLayer("Collisions").getTileGIDAt(tilePos);
+        var hasGroundCollision = groundGID != 0;
 
-        var tile = collisionsLayer.getTiledTileAt(tilePos);
-        cc.log(tile);
+        var waterGID = this.tilemap.getLayer("WaterCollisions").getTileGIDAt(tilePos);
+        var hasWaterCollision = waterGID != 0;
+
+        if (hasGroundCollision) {
+            cc.log('Ground collision');
+        }
+        else if (hasWaterCollision) {
+            cc.log('Water collision');
+        }
     }
 });
