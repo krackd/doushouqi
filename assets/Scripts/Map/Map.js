@@ -12,24 +12,7 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
-        // foo: {
-        //     // ATTRIBUTES:
-        //     default: null,        // The default value will be used only when the component attaching
-        //                           // to a node for the first time
-        //     type: cc.SpriteFrame, // optional, default is typeof default
-        //     serializable: true,   // optional, default is true
-        // },
-        // bar: {
-        //     get () {
-        //         return this._bar;
-        //     },
-        //     set (value) {
-        //         this._bar = value;
-        //     }
-        // },
     },
-
-    // LIFE-CYCLE CALLBACKS:
 
     // onLoad () {},
 
@@ -41,21 +24,35 @@ cc.Class({
     // update (dt) {},
 
     onMouseDown(event) {
+        var isGroundCol = this.isGroundCollision(event.getLocationInView());
+        cc.log('isGroundCol: ' + isGroundCol);
+
+        var isWaterCol = this.isWaterCollision(event.getLocationInView());
+        cc.log('isWaterCol: ' + isWaterCol);
+    },
+
+    isGroundCollision(locationInView) {
+        return this.isCollision(
+            this.tilemap
+                .getLayer("Collisions")
+                .getTileGIDAt(this.getTilePosition(locationInView)));
+    },
+
+    isWaterCollision(locationInView) {
+        return this.isCollision(
+            this.tilemap
+                .getLayer("WaterCollisions")
+                .getTileGIDAt(this.getTilePosition(locationInView)));
+    },
+
+    getTilePosition(locationInView) {
         var tilePos = new cc.Vec2(0,0);
-        tilePos.x = Math.floor(event.getLocationInView().x / this.tilemap.getTileSize().width); 
-        tilePos.y = Math.floor(event.getLocationInView().y / this.tilemap.getTileSize().height); 
+        tilePos.x = Math.floor(locationInView.x / this.tilemap.getTileSize().width); 
+        tilePos.y = Math.floor(locationInView.y / this.tilemap.getTileSize().height);
+        return tilePos;
+    },
 
-        var groundGID = this.tilemap.getLayer("Collisions").getTileGIDAt(tilePos);
-        var hasGroundCollision = groundGID != 0;
-
-        var waterGID = this.tilemap.getLayer("WaterCollisions").getTileGIDAt(tilePos);
-        var hasWaterCollision = waterGID != 0;
-
-        if (hasGroundCollision) {
-            cc.log('Ground collision');
-        }
-        else if (hasWaterCollision) {
-            cc.log('Water collision');
-        }
+    isCollision(gid) {
+        return gid != 0;
     }
 });
