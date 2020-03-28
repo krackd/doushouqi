@@ -12,30 +12,61 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
-        // foo: {
-        //     // ATTRIBUTES:
-        //     default: null,        // The default value will be used only when the component attaching
-        //                           // to a node for the first time
-        //     type: cc.SpriteFrame, // optional, default is typeof default
-        //     serializable: true,   // optional, default is true
-        // },
-        // bar: {
-        //     get () {
-        //         return this._bar;
-        //     },
-        //     set (value) {
-        //         this._bar = value;
-        //     }
-        // },
-    },
+        selected: {
+            get () {
+                return this._selected;
+            },
 
-    // LIFE-CYCLE CALLBACKS:
+            set (value) {
+                this._selected = value;
+            }
+        }
+    },
 
     // onLoad () {},
 
     start () {
+        this.map = this.node.getComponent("Map");
+        this.players = this.node.getParent().getComponentsInChildren("Player");
+        this.currentPlayer = this.players[0];
 
+        this.node.on(cc.Node.EventType.MOUSE_DOWN, this.onMouseDown, this);
     },
 
     // update (dt) {},
+
+    onSelect(pawn) {
+        if (this.currentPlayer.hasPawn(pawn)) {
+            cc.log("Selected pawn belongs to current player");
+            cc.log('pawn pos: ' + this.map.getTilePositionFromPosition(new cc.Vec2(pawn.x, pawn.y)));
+            this.selected = pawn;
+        }
+    },
+
+    onMouseDown(event) {
+        if (this.selected == null) {
+            return;
+        }
+
+        // var viewPoint = cc.v2(event.getLocationX(), event.getLocationY());
+        // var converted = this.node.convertToNodeSpaceAR(viewPoint);
+        // var gridPos = cc.v2(converted.x / 64, converted.y / 64);
+        // var gridPosRounded = cc.v2(Math.round(gridPos.x), Math.round(gridPos.y));
+        // var target = cc.v2(gridPosRounded.x * 64, gridPosRounded.y * 64);
+
+        // if (target.x != this.selected.x || target.y != this.selected.y) {
+        //     this.selected.x = target.x;
+        //     this.selected.y = target.y;
+        //     this.selected = null;
+        // }
+
+        var isGroundCollision = this.map.isGroundCollision(event.getLocationInView());
+        cc.log('isGroundCollision: ' + isGroundCollision);
+
+        var isWaterCollision = this.map.isWaterCollision(event.getLocationInView());
+        cc.log('isWaterCollision: ' + isWaterCollision);
+
+
+        this.selected = null;
+    },
 });

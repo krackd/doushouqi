@@ -21,27 +21,12 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
-        // foo: {
-        //     // ATTRIBUTES:
-        //     default: null,        // The default value will be used only when the component attaching
-        //                           // to a node for the first time
-        //     type: cc.SpriteFrame, // optional, default is typeof default
-        //     serializable: true,   // optional, default is true
-        // },
-        // bar: {
-        //     get () {
-        //         return this._bar;
-        //     },
-        //     set (value) {
-        //         this._bar = value;
-        //     }
-        // },
-    },
 
-    // LIFE-CYCLE CALLBACKS:
+    },
 
     onLoad() {
         this.player = this.node.getParent().getComponent("Player");
+        this.board = this.player.node.getParent().getComponentInChildren("Board");
 
         // add keyboard input listener to call turnLeft and turnRight
         cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
@@ -63,13 +48,11 @@ cc.Class({
     
     onMouseLeave(event) {
         this.node.opacity = IDLE_OPACITY;
-        this.node.off(cc.Node.EventType.MOUSE_MOVE, this.move, this);
     },
     
     onMouseDown(event) {
         this.node.opacity = MOVE_OPACITY;
-        this.node.on(cc.Node.EventType.MOUSE_MOVE, this.move, this);
-        this.player.selected = this.node;
+        this.board.onSelect(this);
     },
     
     onMouseUp(event) {
@@ -78,11 +61,6 @@ cc.Class({
         if (this._callback) {
             this._callback();
         }
-    },
-    
-    move(event) {
-        this.node.x += event.getDelta().x;
-        this.node.y += event.getDelta().y;
     },
 
     onKeyDown(event) {

@@ -18,18 +18,9 @@ cc.Class({
 
     start () {
         this.tilemap = this.node.getComponent(cc.TiledMap);
-        this.node.on(cc.Node.EventType.MOUSE_DOWN, this.onMouseDown, this);
     },
 
     // update (dt) {},
-
-    onMouseDown(event) {
-        var isGroundCol = this.isGroundCollision(event.getLocationInView());
-        cc.log('isGroundCol: ' + isGroundCol);
-
-        var isWaterCol = this.isWaterCollision(event.getLocationInView());
-        cc.log('isWaterCol: ' + isWaterCol);
-    },
 
     isGroundCollision(locationInView) {
         return this.isCollision(
@@ -50,6 +41,19 @@ cc.Class({
         tilePos.x = Math.floor(locationInView.x / this.tilemap.getTileSize().width); 
         tilePos.y = Math.floor(locationInView.y / this.tilemap.getTileSize().height);
         return tilePos;
+    },
+    
+    getTilePositionFromPosition(position) {
+        var tilePos = new cc.Vec2(0,0);
+        tilePos.x = Math.floor(position.x / this.tilemap.getTileSize().width);
+        tilePos.y = Math.floor(position.y / this.tilemap.getTileSize().height);
+        // tilePos.x += this.getMapSize().x / 2;
+        // tilePos.y += this.getMapSize().y / 2;
+        return tilePos;
+    },
+
+    getMapSize() {
+        return this.tilemap.getMapSize();
     },
 
     isCollision(gid) {
