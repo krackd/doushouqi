@@ -48,24 +48,20 @@ cc.Class({
 
         var isGroundCollision = this.map.isGroundCollision(event.getLocationInView());
         if (isGroundCollision) {
-            cc.log('Clicked on a collision tile');
             return;
         }
 
         var isWaterCollision = this.map.isWaterCollision(event.getLocationInView());
         if (isWaterCollision) {
-            cc.log('Clicked on a water tile');
             return;
         }
 
         var selectedPos = this.map.getPawnPosition(this.selected);
         var tilePos = this.map.getTilePosition(event.getLocationInView());
         if (JSON.stringify(selectedPos) === JSON.stringify(tilePos)) {
-            cc.log('Clicked on selected pawn');
             return;
         }
 
-        cc.log('Moving selected pawn');
         var target = this.map.getPositionFromTilePosition(tilePos);
         var distance = tilePos.sub(selectedPos).magSqr();
         
