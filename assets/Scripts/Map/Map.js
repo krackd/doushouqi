@@ -44,16 +44,31 @@ cc.Class({
     },
     
     getTilePositionFromPosition(position) {
+        var halfSize = this.getMapHalfSize();
         var tilePos = new cc.Vec2(0,0);
-        tilePos.x = Math.floor(position.x / this.tilemap.getTileSize().width);
-        tilePos.y = Math.floor(position.y / this.tilemap.getTileSize().height);
-        // tilePos.x += this.getMapSize().x / 2;
-        // tilePos.y += this.getMapSize().y / 2;
+        tilePos.x = Math.floor(position.x / this.tilemap.getTileSize().width) + halfSize.x;
+        tilePos.y = halfSize.y - Math.floor(position.y / this.tilemap.getTileSize().height);
         return tilePos;
     },
 
-    getMapSize() {
-        return this.tilemap.getMapSize();
+    getPositionFromTilePosition(tilePos) {
+        var halfSize = this.getMapHalfSize();
+        var pos = new cc.Vec2(0,0);
+        pos.x = (tilePos.x - halfSize.x) * this.tilemap.getTileSize().width;
+        pos.y = (halfSize.y - tilePos.y) * this.tilemap.getTileSize().height;
+        return pos;
+    },
+
+    getPawnPosition(pawn) {
+        return this.getTilePositionFromPosition(pawn.getPositionVec2());
+    },
+    
+    getMapHalfSize() {
+        var size = this.tilemap.getMapSize();
+        return new cc.Vec2(
+            Math.floor(size.width / 2),
+            Math.floor(size.height / 2)
+        );
     },
 
     isCollision(gid) {

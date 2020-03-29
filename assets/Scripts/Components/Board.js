@@ -37,8 +37,7 @@ cc.Class({
 
     onSelect(pawn) {
         if (this.currentPlayer.hasPawn(pawn)) {
-            cc.log("Selected pawn belongs to current player");
-            cc.log('pawn pos: ' + this.map.getTilePositionFromPosition(new cc.Vec2(pawn.x, pawn.y)));
+            cc.log('pawn pos: ' + this.map.getPawnPosition(pawn));
             this.selected = pawn;
         }
     },
@@ -47,18 +46,6 @@ cc.Class({
         if (this.selected == null) {
             return;
         }
-
-        // var viewPoint = cc.v2(event.getLocationX(), event.getLocationY());
-        // var converted = this.node.convertToNodeSpaceAR(viewPoint);
-        // var gridPos = cc.v2(converted.x / 64, converted.y / 64);
-        // var gridPosRounded = cc.v2(Math.round(gridPos.x), Math.round(gridPos.y));
-        // var target = cc.v2(gridPosRounded.x * 64, gridPosRounded.y * 64);
-
-        // if (target.x != this.selected.x || target.y != this.selected.y) {
-        //     this.selected.x = target.x;
-        //     this.selected.y = target.y;
-        //     this.selected = null;
-        // }
 
         var isGroundCollision = this.map.isGroundCollision(event.getLocationInView());
         cc.log('isGroundCollision: ' + isGroundCollision);

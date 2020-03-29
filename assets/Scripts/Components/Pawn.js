@@ -90,6 +90,12 @@ cc.Class({
         
     },
 
+    getPositionVec2() {
+        var pawnPos3d = this.node.getPosition();
+        var pawnPos2d = new cc.Vec2(pawnPos3d.x, pawnPos3d.y);
+        return pawnPos2d;
+    },
+
     moveRight() {
         // FIXME check collisions instead of checking positions
         // TODO should check target position instead
