@@ -20,6 +20,11 @@ cc.Class({
             set (value) {
                 this._selected = value;
             }
+        },
+
+        selectionColor: {
+            default: cc.Color.GREEN,
+            type: cc.Color
         }
     },
 
@@ -39,6 +44,7 @@ cc.Class({
     onSelect(pawn) {
         if (this.currentPlayer.hasPawn(pawn)) {
             this.selected = pawn;
+            pawn.setBorderColor(this.selectionColor);
         }
     },
 
@@ -66,6 +72,7 @@ cc.Class({
         
         if (distance <= 2) {
             this.selected.moveTo(target);
+            this.selected.resetBorderColor();
             this.selected = null;
             this.currentPlayerIndex = ++this.currentPlayerIndex % this.players.length;
             this.currentPlayer = this.players[this.currentPlayerIndex];

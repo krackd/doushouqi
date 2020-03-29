@@ -896,6 +896,13 @@
       "__id__": 5
     },
     "_enabled": true,
+    "selectionColor": {
+      "__type__": "cc.Color",
+      "r": 0,
+      "g": 255,
+      "b": 0,
+      "a": 255
+    },
     "_id": "22+I5UVuRIWKNdrjm1j3pS"
   },
   {
@@ -1030,7 +1037,7 @@
       "ctor": "Float64Array",
       "array": [
         -125.793,
-        -191.055,
+        -192.631,
         0,
         0,
         0,
@@ -1392,7 +1399,7 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        68.098,
+        63.369,
         -128,
         0,
         0,
@@ -1634,7 +1641,7 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        192.63,
+        191.054,
         -128,
         0,
         0,
@@ -1963,6 +1970,16 @@
       "__id__": 23
     },
     "_enabled": true,
+    "color": {
+      "__type__": "cc.Color",
+      "r": 0,
+      "g": 51,
+      "b": 255,
+      "a": 255
+    },
+    "border": {
+      "__uuid__": "3e373d28-3ed7-4843-bc4d-441ec195cde9"
+    },
     "_id": "40IPZwQl5JFqRVbAw24xWI"
   },
   {
@@ -2107,8 +2124,8 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        128.769,
-        192.901,
+        129.445,
+        191.034,
         0,
         0,
         0,
@@ -2228,8 +2245,8 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        -122.509,
-        192.744,
+        -128.452,
+        192.611,
         0,
         0,
         0,
@@ -2349,8 +2366,8 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        193.54,
-        128.946,
+        195.366,
+        127.349,
         0,
         0,
         0,
@@ -2470,8 +2487,8 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        -63.067,
-        128.493,
+        -63.553,
+        128.743,
         0,
         0,
         0,
@@ -2591,8 +2608,8 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        -191.942,
-        254.199,
+        -195.108,
+        253.506,
         0,
         0,
         0,
@@ -2712,8 +2729,8 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        -191.155,
-        126.876,
+        -189.711,
+        127.349,
         0,
         0,
         0,
@@ -2833,8 +2850,8 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        192.036,
-        255.589,
+        192.949,
+        253.507,
         0,
         0,
         0,
@@ -2954,8 +2971,8 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        64.204,
-        127.158,
+        67.153,
+        130.138,
         0,
         0,
         0,
@@ -3041,6 +3058,16 @@
       "__id__": 58
     },
     "_enabled": true,
+    "color": {
+      "__type__": "cc.Color",
+      "r": 255,
+      "g": 0,
+      "b": 0,
+      "a": 255
+    },
+    "border": {
+      "__uuid__": "3e373d28-3ed7-4843-bc4d-441ec195cde9"
+    },
     "_id": "90l1PcAItHAai/oCHXoIjj"
   },
   {

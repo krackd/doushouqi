@@ -21,7 +21,17 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
-        canSwim: false
+        canSwim: false,
+
+        border: {
+            get () {
+                return this._border;
+            },
+
+            set (value) {
+                this._border = value;
+            }
+        }
     },
 
     onLoad() {
@@ -98,6 +108,14 @@ cc.Class({
 
     moveTo(target) {
         this.node.runAction(cc.moveTo(MOVE_DURATION, target));
+    },
+
+    setBorderColor(color) {
+        this.border.color = color;
+    },
+
+    resetBorderColor() {
+        this.border.color = this.player.color;
     },
 
     moveRight() {

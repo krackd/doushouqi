@@ -1074,6 +1074,16 @@
       "__id__": 1
     },
     "_enabled": true,
+    "color": {
+      "__type__": "cc.Color",
+      "r": 0,
+      "g": 0,
+      "b": 0,
+      "a": 255
+    },
+    "border": {
+      "__uuid__": "3e373d28-3ed7-4843-bc4d-441ec195cde9"
+    },
     "_id": ""
   },
   {

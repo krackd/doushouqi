@@ -2,6 +2,15 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
+        color: {
+            default: cc.color(0,0,0,255),
+            type: cc.Color
+        },
+        
+        border: {
+            default: null,
+            type: cc.Prefab
+        }
     },
 
     // LIFE-CYCLE CALLBACKS:
@@ -20,15 +29,22 @@ cc.Class({
     },
 
     snapPawns() {
-        this.pawns.forEach(pawn => this.snap(pawn));
+        this.pawns.forEach(pawn => this.initSpawn(pawn));
     },
 
-    snap(pawn) {
+    initSpawn(pawn) {
+        // Snapped position
         var pos = this.map.getPositionFromTilePosition(
             this.map.getTilePositionFromPosition(
                 pawn.node.getPosition()
             )
         );
+        // Creating the border
+        pawn.border = cc.instantiate(this.border);
+        pawn.border.setPosition(cc.v2(0, 0));
+        pawn.border.setParent(pawn.node);
+        pawn.border.color = this.color;
+        // Snapping pawn and adding the border
         pawn.node.setPosition(pos);
     }
 
