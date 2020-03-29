@@ -96,6 +96,10 @@ cc.Class({
         return pawnPos2d;
     },
 
+    moveTo(target) {
+        this.node.runAction(cc.moveTo(MOVE_DURATION, target));
+    },
+
     moveRight() {
         // FIXME check collisions instead of checking positions
         // TODO should check target position instead
