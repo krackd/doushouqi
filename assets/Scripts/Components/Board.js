@@ -46,13 +46,11 @@ cc.Class({
             return;
         }
 
-        var isGroundCollision = this.map.isGroundCollision(event.getLocationInView());
-        if (isGroundCollision) {
+        if (this.map.isGroundCollision(event.getLocationInView())) {
             return;
         }
 
-        var isWaterCollision = this.map.isWaterCollision(event.getLocationInView());
-        if (isWaterCollision) {
+        if (!this.selected.canSwim && this.map.isWaterCollision(event.getLocationInView())) {
             return;
         }
 

@@ -116,6 +116,7 @@
       "__id__": 1
     },
     "_enabled": true,
+    "canSwim": false,
     "_id": ""
   },
   {
@@ -124,7 +125,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "71bf5d8a-dc62-4a30-a671-ed454c197e24"
     },
     "fileId": "a603Lj3cZNhafsNIGHSinM",
     "sync": false

@@ -21,7 +21,7 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
-
+        canSwim: false
     },
 
     onLoad() {
