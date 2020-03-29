@@ -116,7 +116,7 @@
       "__id__": 1
     },
     "_enabled": true,
-    "canSwim": false,
+    "canSwim": true,
     "_id": ""
   },
   {

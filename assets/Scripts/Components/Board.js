@@ -25,10 +25,11 @@ cc.Class({
 
     // onLoad () {},
 
-    start () {
+    onLoad () {
         this.map = this.node.getComponent("Map");
         this.players = this.node.getParent().getComponentsInChildren("Player");
-        this.currentPlayer = this.players[0];
+        this.currentPlayerIndex = 0;
+        this.currentPlayer = this.players[this.currentPlayerIndex];
 
         this.node.on(cc.Node.EventType.MOUSE_DOWN, this.onMouseDown, this);
     },
@@ -66,6 +67,8 @@ cc.Class({
         if (distance <= 2) {
             this.selected.moveTo(target);
             this.selected = null;
+            this.currentPlayerIndex = ++this.currentPlayerIndex % this.players.length;
+            this.currentPlayer = this.players[this.currentPlayerIndex];
         }
         
     },

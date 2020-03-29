@@ -46,8 +46,8 @@ cc.Class({
     getTilePositionFromPosition(position) {
         var halfSize = this.getMapHalfSize();
         var tilePos = new cc.Vec2(0,0);
-        tilePos.x = Math.floor(position.x / this.tilemap.getTileSize().width) + halfSize.x;
-        tilePos.y = halfSize.y - Math.floor(position.y / this.tilemap.getTileSize().height);
+        tilePos.x = Math.round(position.x / this.tilemap.getTileSize().width) + halfSize.x;
+        tilePos.y = halfSize.y - Math.round(position.y / this.tilemap.getTileSize().height);
         return tilePos;
     },
 

@@ -8,14 +8,14 @@
 //  - [Chinese] https://docs.cocos.com/creator/manual/zh/scripting/life-cycle-callbacks.html
 //  - [English] https://www.cocos2d-x.org/docs/creator/manual/en/scripting/life-cycle-callbacks.html
 
-const MOVE_DURATION = 0.01;
+const MOVE_DURATION = 0.1;
 const CELL_SIZE = 64;
 const MAP_HALF_HEIGHT = 4;
 const MAP_HALF_WIDTH = 3;
 
-const IDLE_OPACITY = 100;
-const HOVER_OPACITY = 200;
-const MOVE_OPACITY = 255;
+const IDLE_OPACITY = 255;
+const HOVER_OPACITY = 100;
+const MOVE_OPACITY = 100;
 
 cc.Class({
     extends: cc.Component,
