@@ -10,8 +10,6 @@
 
 const MOVE_DURATION = 0.1;
 const CELL_SIZE = 64;
-const MAP_HALF_HEIGHT = 4;
-const MAP_HALF_WIDTH = 3;
 
 const IDLE_OPACITY = 255;
 const HOVER_OPACITY = 100;
@@ -38,8 +36,6 @@ cc.Class({
         this.player = this.node.getParent().getComponent("Player");
         this.board = this.player.node.getParent().getComponentInChildren("Board");
 
-        // add keyboard input listener to call turnLeft and turnRight
-        cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
         this.node.on(cc.Node.EventType.MOUSE_ENTER, this.onMouseEnter, this);
         this.node.on(cc.Node.EventType.MOUSE_LEAVE, this.onMouseLeave, this);
         this.node.on(cc.Node.EventType.MOUSE_DOWN, this.onMouseDown, this);
@@ -47,9 +43,16 @@ cc.Class({
 
         this.node.opacity = IDLE_OPACITY;
     },
+    
+    start () {
+
+    },
 
     onDestroy() {
-        cc.systemEvent.off(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
+        this.node.off(cc.Node.EventType.MOUSE_ENTER, this.onMouseEnter, this);
+        this.node.off(cc.Node.EventType.MOUSE_LEAVE, this.onMouseLeave, this);
+        this.node.off(cc.Node.EventType.MOUSE_DOWN, this.onMouseDown, this);
+        this.node.off(cc.Node.EventType.MOUSE_UP, this.onMouseUp, this);
     },
 
     onMouseEnter(event) {
@@ -67,33 +70,9 @@ cc.Class({
     
     onMouseUp(event) {
         this.node.opacity = IDLE_OPACITY;
-        this.node.off(cc.Node.EventType.MOUSE_MOVE, this.move, this);
         if (this._callback) {
             this._callback();
         }
-    },
-
-    onKeyDown(event) {
-        var macro = cc.macro;
-        switch (event.keyCode) {
-            case macro.KEY.q:
-                this.moveLeft();
-                break;
-            case macro.KEY.d:
-                this.moveRight();
-                break;
-            case macro.KEY.z:
-                this.moveUp();
-                break;
-            case macro.KEY.s:
-                this.moveDown();
-                break;
-            
-        }
-    },
-
-    start () {
-
     },
 
     update (dt) {
@@ -118,29 +97,4 @@ cc.Class({
         this.border.color = this.player.color;
     },
 
-    moveRight() {
-        // FIXME check collisions instead of checking positions
-        // TODO should check target position instead
-        if (this.node.x < MAP_HALF_WIDTH * CELL_SIZE) {
-            this.node.runAction(cc.moveBy(MOVE_DURATION, cc.v2(CELL_SIZE, 0)));
-        }
-    },
-    
-    moveLeft() {
-        if (this.node.x > -MAP_HALF_WIDTH * CELL_SIZE) {
-            this.node.runAction(cc.moveBy(MOVE_DURATION, cc.v2(-CELL_SIZE, 0)));
-        }
-    },
-    
-    moveUp() {
-        if (this.node.y < MAP_HALF_HEIGHT * CELL_SIZE) {
-            this.node.runAction(cc.moveBy(MOVE_DURATION, cc.v2(0, CELL_SIZE)));
-        }
-    },
-    
-    moveDown() {
-        if (this.node.y > -MAP_HALF_HEIGHT * CELL_SIZE) {
-            this.node.runAction(cc.moveBy(MOVE_DURATION, cc.v2(0, -CELL_SIZE)));
-        }
-    }
 });

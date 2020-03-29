@@ -3,8 +3,7 @@ cc.Class({
 
     properties: {
         color: {
-            default: cc.color(0,0,0,255),
-            type: cc.Color
+            default: cc.color(0,0,0,255)
         },
         
         border: {
@@ -29,10 +28,10 @@ cc.Class({
     },
 
     snapPawns() {
-        this.pawns.forEach(pawn => this.initSpawn(pawn));
+        this.pawns.forEach(pawn => this.initPawn(pawn));
     },
 
-    initSpawn(pawn) {
+    initPawn(pawn) {
         // Snapped position
         var pos = this.map.getPositionFromTilePosition(
             this.map.getTilePositionFromPosition(

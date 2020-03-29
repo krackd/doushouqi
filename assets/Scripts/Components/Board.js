@@ -23,8 +23,7 @@ cc.Class({
         },
 
         selectionColor: {
-            default: cc.Color.GREEN,
-            type: cc.Color
+            default: cc.Color.GREEN
         }
     },
 
