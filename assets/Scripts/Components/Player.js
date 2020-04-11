@@ -3,9 +3,9 @@ cc.Class({
 
     properties: {
         color: {
-            default: cc.color(0,0,0,255)
+            default: cc.color(0, 0, 0, 255)
         },
-        
+
         border: {
             default: null,
             type: cc.Prefab
@@ -45,6 +45,17 @@ cc.Class({
         pawn.border.color = this.color;
         // Snapping pawn and adding the border
         pawn.node.setPosition(pos);
+    },
+
+    getPawns() {
+        return this.pawns;
+    },
+
+    removePawn(pawn) {
+        var index = this.pawns.indexOf(pawn);
+        if (index > -1) {
+            this.pawns.splice(index, 1);
+        }
     }
 
     // update (dt) {},

@@ -22,11 +22,11 @@ cc.Class({
         canSwim: false,
 
         border: {
-            get () {
+            get() {
                 return this._border;
             },
 
-            set (value) {
+            set(value) {
                 this._border = value;
             }
         }
@@ -43,8 +43,8 @@ cc.Class({
 
         this.node.opacity = IDLE_OPACITY;
     },
-    
-    start () {
+
+    start() {
 
     },
 
@@ -58,16 +58,16 @@ cc.Class({
     onMouseEnter(event) {
         this.node.opacity = HOVER_OPACITY;
     },
-    
+
     onMouseLeave(event) {
         this.node.opacity = IDLE_OPACITY;
     },
-    
+
     onMouseDown(event) {
         this.node.opacity = MOVE_OPACITY;
         this.board.onSelect(this);
     },
-    
+
     onMouseUp(event) {
         this.node.opacity = IDLE_OPACITY;
         if (this._callback) {
@@ -75,8 +75,8 @@ cc.Class({
         }
     },
 
-    update (dt) {
-        
+    update(dt) {
+
     },
 
     getPositionVec2() {
@@ -95,6 +95,11 @@ cc.Class({
 
     resetBorderColor() {
         this.border.color = this.player.color;
+    },
+
+    destroyPawn() {
+        this.player.removePawn(this);
+        this.node.destroy();
     },
 
 });
