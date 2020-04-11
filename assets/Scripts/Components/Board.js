@@ -44,6 +44,10 @@ cc.Class({
 
     onSelect(pawn) {
         if (this.currentPlayer.hasPawn(pawn)) {
+            if (this.selected != null) {
+                this.selected.resetBorderColor();
+            }
+
             this.selected = pawn;
             pawn.setBorderColor(this.selectionColor);
         }
