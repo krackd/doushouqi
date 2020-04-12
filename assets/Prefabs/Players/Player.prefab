@@ -206,6 +206,7 @@
     },
     "_enabled": true,
     "canSwim": false,
+    "value": 0,
     "_id": ""
   },
   {
@@ -327,6 +328,7 @@
     },
     "_enabled": true,
     "canSwim": false,
+    "value": 0,
     "_id": ""
   },
   {
@@ -448,6 +450,7 @@
     },
     "_enabled": true,
     "canSwim": false,
+    "value": 0,
     "_id": ""
   },
   {
@@ -569,6 +572,7 @@
     },
     "_enabled": true,
     "canSwim": false,
+    "value": 0,
     "_id": ""
   },
   {
@@ -690,6 +694,7 @@
     },
     "_enabled": true,
     "canSwim": false,
+    "value": 0,
     "_id": ""
   },
   {
@@ -811,6 +816,7 @@
     },
     "_enabled": true,
     "canSwim": true,
+    "value": 0,
     "_id": ""
   },
   {
@@ -932,6 +938,7 @@
     },
     "_enabled": true,
     "canSwim": false,
+    "value": 0,
     "_id": ""
   },
   {
@@ -1053,6 +1060,7 @@
     },
     "_enabled": true,
     "canSwim": false,
+    "value": 0,
     "_id": ""
   },
   {
@@ -1083,6 +1091,9 @@
     },
     "border": {
       "__uuid__": "3e373d28-3ed7-4843-bc4d-441ec195cde9"
+    },
+    "valueBorder": {
+      "__uuid__": "bd775afa-d909-4a98-85d3-c1df532a715f"
     },
     "_id": ""
   },

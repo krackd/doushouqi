@@ -29,7 +29,9 @@ cc.Class({
             set(value) {
                 this._border = value;
             }
-        }
+        },
+
+        value: 0
     },
 
     onLoad() {
@@ -45,7 +47,7 @@ cc.Class({
     },
 
     start() {
-
+        this.makeLabel();
     },
 
     onDestroy() {
@@ -76,7 +78,11 @@ cc.Class({
     },
 
     update(dt) {
+        
+    },
 
+    beats(pawn) {
+        return this.value > pawn.value || this.value == 1 && pawn.value == 8;
     },
 
     getPositionVec2() {
@@ -102,4 +108,24 @@ cc.Class({
         this.node.destroy();
     },
 
+    makeLabel() {
+        var valueBorder = cc.instantiate(this.player.valueBorder);
+        var labelNode = new cc.Node();
+
+        this.label = labelNode.addComponent(cc.Label);
+        this.label.string = this.value.toString();
+        this.label.fontSize = 12;
+        this.label.fontFamilty = "Impact";
+        this.label.enableBold = true;
+
+        labelNode.setParent(valueBorder);
+        labelNode.color = cc.Color.BLACK;
+        labelNode.setPosition(0, -19);
+
+        valueBorder.setParent(this.node);
+        valueBorder.setPosition(0, 0);
+        valueBorder.setPosition(-24, -24);
+    },
 });
+
+

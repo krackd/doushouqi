@@ -54,7 +54,9 @@ cc.Class({
     },
 
     onMouseDown(event) {
-        if (this.selected == null) {
+        var pawn = this.selected;
+
+        if (pawn == null) {
             return;
         }
 
@@ -62,11 +64,11 @@ cc.Class({
             return;
         }
 
-        if (!this.selected.canSwim && this.map.isWaterCollision(event.getLocationInView())) {
+        if (!pawn.canSwim && this.map.isWaterCollision(event.getLocationInView())) {
             return;
         }
 
-        var selectedPos = this.map.getPawnPosition(this.selected);
+        var selectedPos = this.map.getPawnPosition(pawn);
         var tilePos = this.map.getTilePosition(event.getLocationInView());
         if (Utils.isSame(selectedPos, tilePos)) {
             return;
@@ -75,15 +77,16 @@ cc.Class({
         var target = this.map.getPositionFromTilePosition(tilePos);
         var distance = tilePos.sub(selectedPos).magSqr();
 
-        if (distance <= 2) {
-            var pawn = this.selected;
+        var opponentPawn = this.getOpponent(target);
+        if (distance <= 2 && (opponentPawn === undefined || pawn.beats(opponentPawn))) {
             this.selected = null;
 
             pawn.moveTo(target);
             pawn.resetBorderColor();
             
-            var opponentPawn = this.getOpponent(target);
+            
             if (opponentPawn !== undefined) {
+                cc.log("Removing pawn");
                 opponentPawn.destroyPawn();
             }
 
@@ -95,12 +98,13 @@ cc.Class({
     },
 
     getOpponent(pos) {
+        var tilePos = this.map.getTilePositionFromPosition(pos);
         return this.players
             .filter(player => player !== this.currentPlayer)
             .flatMap(player => player.getPawns())
-            .find(p =>
-                p.node.getPosition().x == pos.x
-                && p.node.getPosition().y == pos.y
-            );
+            .find(p => {
+                var pawnTilePos = this.map.getTilePositionFromPosition(p.node.getPosition());
+                return pawnTilePos.x == tilePos.x && pawnTilePos.y == tilePos.y;
+            });
     },
 });

@@ -9,6 +9,11 @@ cc.Class({
         border: {
             default: null,
             type: cc.Prefab
+        },
+
+        valueBorder: {
+            default: null,
+            type: cc.Prefab
         }
     },
 

@@ -174,7 +174,7 @@
       "array": [
         0,
         0,
-        561.1844616523163,
+        567.2466394788073,
         0,
         0,
         0,
@@ -1102,6 +1102,7 @@
     },
     "_enabled": true,
     "canSwim": false,
+    "value": 2,
     "_id": "ddZg+5ct9MGJV3UXkq1GVu"
   },
   {
@@ -1223,6 +1224,7 @@
     },
     "_enabled": true,
     "canSwim": false,
+    "value": 3,
     "_id": "4cUKRQqCJBtp3sOdVJ3vq+"
   },
   {
@@ -1344,6 +1346,7 @@
     },
     "_enabled": true,
     "canSwim": false,
+    "value": 8,
     "_id": "13/SMoN5JK6r382dFt4xr/"
   },
   {
@@ -1465,6 +1468,7 @@
     },
     "_enabled": true,
     "canSwim": false,
+    "value": 5,
     "_id": "7eQiEQNdVFuqBumgRjMqXn"
   },
   {
@@ -1586,6 +1590,7 @@
     },
     "_enabled": true,
     "canSwim": false,
+    "value": 7,
     "_id": "e4noUVIOJCg6NiKer2E20c"
   },
   {
@@ -1707,6 +1712,7 @@
     },
     "_enabled": true,
     "canSwim": true,
+    "value": 1,
     "_id": "39LSrzuq1FzamIQlyXRich"
   },
   {
@@ -1828,6 +1834,7 @@
     },
     "_enabled": true,
     "canSwim": false,
+    "value": 6,
     "_id": "57vwbsar5MYrso3UfyRIwJ"
   },
   {
@@ -1949,6 +1956,7 @@
     },
     "_enabled": true,
     "canSwim": false,
+    "value": 4,
     "_id": "afBsnctpxJnqAgTv7wwhAH"
   },
   {
@@ -1979,6 +1987,9 @@
     },
     "border": {
       "__uuid__": "3e373d28-3ed7-4843-bc4d-441ec195cde9"
+    },
+    "valueBorder": {
+      "__uuid__": "bd775afa-d909-4a98-85d3-c1df532a715f"
     },
     "_id": "40IPZwQl5JFqRVbAw24xWI"
   },
@@ -2190,6 +2201,7 @@
     },
     "_enabled": true,
     "canSwim": false,
+    "value": 2,
     "_id": "d7y6LrXW5NnLi9RKzMmIEw"
   },
   {
@@ -2311,6 +2323,7 @@
     },
     "_enabled": true,
     "canSwim": false,
+    "value": 3,
     "_id": "34KuP2gt1Cr677OZu7C+Jz"
   },
   {
@@ -2432,6 +2445,7 @@
     },
     "_enabled": true,
     "canSwim": false,
+    "value": 8,
     "_id": "1c2MdxrXJFip8yVq8zHXKC"
   },
   {
@@ -2553,6 +2567,7 @@
     },
     "_enabled": true,
     "canSwim": false,
+    "value": 5,
     "_id": "511eT5AyRNqJQSxj/ARsvJ"
   },
   {
@@ -2674,6 +2689,7 @@
     },
     "_enabled": true,
     "canSwim": false,
+    "value": 7,
     "_id": "68KKVryeJE0I04sRXwzSjB"
   },
   {
@@ -2795,6 +2811,7 @@
     },
     "_enabled": true,
     "canSwim": true,
+    "value": 1,
     "_id": "79rxBsm51Lqa3oo4bd9S+X"
   },
   {
@@ -2916,6 +2933,7 @@
     },
     "_enabled": true,
     "canSwim": false,
+    "value": 6,
     "_id": "8eXyylqIBMxJQ7eD0kb90+"
   },
   {
@@ -3037,6 +3055,7 @@
     },
     "_enabled": true,
     "canSwim": false,
+    "value": 4,
     "_id": "04hQo5GhZFZYiPP5utJUY1"
   },
   {
@@ -3067,6 +3086,9 @@
     },
     "border": {
       "__uuid__": "3e373d28-3ed7-4843-bc4d-441ec195cde9"
+    },
+    "valueBorder": {
+      "__uuid__": "bd775afa-d909-4a98-85d3-c1df532a715f"
     },
     "_id": "90l1PcAItHAai/oCHXoIjj"
   },
