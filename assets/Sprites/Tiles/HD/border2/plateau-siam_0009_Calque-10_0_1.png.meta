@@ -1,0 +1,34 @@
+{
+  "ver": "2.3.3",
+  "uuid": "0ea1dc9a-86c5-41f9-83e0-50fedc614fea",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "platformSettings": {},
+  "subMetas": {
+    "plateau-siam_0009_Calque-10_0_1": {
+      "ver": "1.0.4",
+      "uuid": "dffd0552-6d08-46da-95a3-761625003bee",
+      "rawTextureUuid": "0ea1dc9a-86c5-41f9-83e0-50fedc614fea",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 64,
+      "height": 64,
+      "rawWidth": 64,
+      "rawHeight": 64,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}
