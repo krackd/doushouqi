@@ -21,7 +21,8 @@ cc.Class({
             type: cc.Prefab
         },
 
-        pawnOffset: cc.v2(0, 0.1), // in tile position units (0..1)
+        pawnOffset: cc.v2(0, 0.1),  // in tile position units (0..1)
+        flip: false,                // true if should flip sprite horizontally
     },
 
     // LIFE-CYCLE CALLBACKS:
@@ -59,6 +60,11 @@ cc.Class({
         this.snapPawns(pawn);
         this.makeShadow(pawn);
         this.makeBorder(pawn);
+
+        if (this.flip) {
+            var sprite = pawn.node.getChildByName("Sprite");
+            sprite.scaleX *= -1;
+        }
     },
 
     getPawns() {
@@ -85,7 +91,6 @@ cc.Class({
         pawn.border = cc.instantiate(this.shadow);
         var pos = this.pawnOffset.mul(64);
         pos.y -= 32;
-        console.log(pos);
         pawn.border.setPosition(pos);
         pawn.node.insertChild(pawn.border, 0);
     }
