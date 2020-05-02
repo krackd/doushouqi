@@ -124,7 +124,7 @@ cc.Class({
 
         valueBorder.setParent(this.node);
         valueBorder.setPosition(0, 0);
-        valueBorder.setPosition(-24, -24);
+        valueBorder.setPosition(-21, -21);
     },
 });
 

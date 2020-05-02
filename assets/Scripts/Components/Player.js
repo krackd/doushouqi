@@ -14,7 +14,14 @@ cc.Class({
         valueBorder: {
             default: null,
             type: cc.Prefab
-        }
+        },
+        
+        shadow: {
+            default: null,
+            type: cc.Prefab
+        },
+
+        pawnOffset: cc.v2(0, 0.1), // in tile position units (0..1)
     },
 
     // LIFE-CYCLE CALLBACKS:
@@ -25,31 +32,33 @@ cc.Class({
 
     start() {
         this.pawns = this.node.getComponentsInChildren("Pawn");
-        this.snapPawns();
+        this.initPawns();
     },
 
     hasPawn(pawn) {
         return this.pawns.includes(pawn);
     },
 
-    snapPawns() {
-        this.pawns.forEach(pawn => this.initPawn(pawn));
-    },
-
-    initPawn(pawn) {
+    snapPawns(pawn) {
         // Snapped position
         var pos = this.map.getPositionFromTilePosition(
             this.map.getTilePositionFromPosition(
                 pawn.node.getPosition()
             )
         );
-        // Creating the border
-        pawn.border = cc.instantiate(this.border);
-        pawn.border.setPosition(cc.v2(0, 0));
-        pawn.border.setParent(pawn.node);
-        pawn.border.color = this.color;
-        // Snapping pawn and adding the border
         pawn.node.setPosition(pos);
+        var sprite = pawn.node.getChildByName("Sprite");
+        sprite.setPosition(this.pawnOffset.mul(64));
+    },
+
+    initPawns() {
+        this.pawns.forEach(pawn => this.initPawn(pawn));
+    },
+
+    initPawn(pawn) {
+        this.snapPawns(pawn);
+        this.makeShadow(pawn);
+        this.makeBorder(pawn);
     },
 
     getPawns() {
@@ -61,6 +70,24 @@ cc.Class({
         if (index > -1) {
             this.pawns.splice(index, 1);
         }
+    },
+
+    makeBorder(pawn) {
+        // Creating the border
+        pawn.border = cc.instantiate(this.border);
+        pawn.border.setPosition(cc.v2(0, 0));
+        pawn.border.color = this.color;
+        pawn.node.insertChild(pawn.border, 0);
+    },
+
+    makeShadow(pawn) {
+        // Creating the border
+        pawn.border = cc.instantiate(this.shadow);
+        var pos = this.pawnOffset.mul(64);
+        pos.y -= 32;
+        console.log(pos);
+        pawn.border.setPosition(pos);
+        pawn.node.insertChild(pawn.border, 0);
     }
 
     // update (dt) {},
