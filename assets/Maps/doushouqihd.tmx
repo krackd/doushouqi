@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.3.2" orientation="orthogonal" renderorder="right-down" compressionlevel="0" width="9" height="11" tilewidth="64" tileheight="64" infinite="0" nextlayerid="4" nextobjectid="1">
+<map version="1.2" tiledversion="1.3.2" orientation="orthogonal" renderorder="right-down" compressionlevel="0" width="9" height="11" tilewidth="64" tileheight="64" infinite="0" nextlayerid="6" nextobjectid="1">
  <tileset firstgid="1" name="Terrain" tilewidth="64" tileheight="64" tilecount="8" columns="0">
   <grid orientation="orthogonal" width="1" height="1"/>
   <tile id="0">
@@ -27,7 +27,7 @@
    <image width="64" height="64" source="../Sprites/Tiles/HD/plateau-siam_0007_Calque-8.png"/>
   </tile>
  </tileset>
- <tileset firstgid="9" name="Border1" tilewidth="64" tileheight="64" tilecount="5" columns="0">
+ <tileset firstgid="9" name="Border1" tilewidth="64" tileheight="64" tilecount="7" columns="0">
   <grid orientation="orthogonal" width="1" height="1"/>
   <tile id="0">
    <image width="64" height="64" source="../Sprites/Tiles/HD/border1/debug_plateau-siam_0008_Calque-9_0_0.png"/>
@@ -44,8 +44,14 @@
   <tile id="4">
    <image width="64" height="64" source="../Sprites/Tiles/HD/border1/debug_plateau-siam_0008_Calque-9_0_4.png"/>
   </tile>
+  <tile id="5">
+   <image width="64" height="64" source="../Sprites/Tiles/hdtrap.png"/>
+  </tile>
+  <tile id="6">
+   <image width="63" height="63" source="../Sprites/Tiles/throne.png"/>
+  </tile>
  </tileset>
- <tileset firstgid="14" name="Border2" tilewidth="64" tileheight="64" tilecount="5" columns="0">
+ <tileset firstgid="16" name="Border2" tilewidth="64" tileheight="64" tilecount="5" columns="0">
   <grid orientation="orthogonal" width="1" height="1"/>
   <tile id="5">
    <image width="64" height="64" source="../Sprites/Tiles/HD/border2/plateau-siam_0009_Calque-10_0_0.png"/>
@@ -63,7 +69,7 @@
    <image width="64" height="64" source="../Sprites/Tiles/HD/border2/plateau-siam_0009_Calque-10_0_4.png"/>
   </tile>
  </tileset>
- <tileset firstgid="24" name="Collisions" tilewidth="64" tileheight="64" tilecount="2" columns="0">
+ <tileset firstgid="26" name="Collisions" tilewidth="64" tileheight="64" tilecount="2" columns="0">
   <grid orientation="orthogonal" width="1" height="1"/>
   <tile id="0">
    <image width="64" height="64" source="../Sprites/Tiles/Collision/collisions.png"/>
@@ -74,17 +80,32 @@
  </tileset>
  <layer id="1" name="Middleground" width="9" height="11">
   <data encoding="csv">
-2147483671,2147483670,2147483669,2147483668,19,20,21,22,23,
-1610612749,7,8,3,3,3,3,7,3758096397,
-1610612748,6,2,2,8,6,3,3,3758096396,
+2147483673,2147483672,2147483671,2147483670,21,22,23,24,25,
+1610612749,7,8,14,3,14,3,7,3758096397,
+1610612748,6,2,2,14,6,3,3,3758096396,
 1610612747,7,8,6,8,6,3,6,3758096395,
 1610612746,2,1,1,4,1,1,7,3758096394,
 1610612745,3,1,1,8,1,1,7,2684354569,
 2684354570,3,1,1,6,1,1,2,2684354570,
 2684354571,2,6,7,3,2,7,8,2684354571,
-2684354572,3,6,8,5,2,3,2,2684354572,
-2684354573,7,8,8,3,8,7,3,2684354573,
-3221225495,3221225494,3221225493,3221225492,3221225491,1073741844,1073741845,1073741846,1073741847
+2684354572,3,6,8,14,2,3,2,2684354572,
+2684354573,7,8,14,3,14,7,3,2684354573,
+3221225497,3221225496,3221225495,3221225494,3221225493,1073741846,1073741847,1073741848,1073741849
+</data>
+ </layer>
+ <layer id="4" name="Foreground" width="9" height="11">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,
+0,0,0,0,15,0,0,0,0,
+0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,
+0,0,0,0,15,0,0,0,0,
+0,0,0,0,0,0,0,0,0
 </data>
  </layer>
  <layer id="3" name="WaterCollisions" width="9" height="11" visible="0">
@@ -93,9 +114,9 @@
 0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,
-0,0,25,25,0,25,25,0,0,
-0,0,25,25,0,25,25,0,0,
-0,0,25,25,0,25,25,0,0,
+0,0,27,27,0,27,27,0,0,
+0,0,27,27,0,27,27,0,0,
+0,0,27,27,0,27,27,0,0,
 0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,
@@ -104,17 +125,17 @@
  </layer>
  <layer id="2" name="Collisions" width="9" height="11" visible="0">
   <data encoding="csv">
-24,24,24,24,24,24,24,24,24,
-24,0,0,0,0,0,0,0,24,
-24,0,0,0,0,0,0,0,24,
-24,0,0,0,0,0,0,0,24,
-24,0,0,0,0,0,0,0,24,
-24,0,0,0,0,0,0,0,24,
-24,0,0,0,0,0,0,0,24,
-24,0,0,0,0,0,0,0,24,
-24,0,0,0,0,0,0,0,24,
-24,0,0,0,0,0,0,0,24,
-24,24,24,24,24,24,24,24,24
+26,26,26,26,26,26,26,26,26,
+26,0,0,0,0,0,0,0,26,
+26,0,0,0,0,0,0,0,26,
+26,0,0,0,0,0,0,0,26,
+26,0,0,0,0,0,0,0,26,
+26,0,0,0,0,0,0,0,26,
+26,0,0,0,0,0,0,0,26,
+26,0,0,0,0,0,0,0,26,
+26,0,0,0,0,0,0,0,26,
+26,0,0,0,0,0,0,0,26,
+26,26,26,26,26,26,26,26,26
 </data>
  </layer>
 </map>

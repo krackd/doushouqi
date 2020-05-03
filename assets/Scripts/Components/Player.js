@@ -2,6 +2,8 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
+        playerIndex: 0,
+
         color: {
             default: cc.color(0, 0, 0, 255)
         },

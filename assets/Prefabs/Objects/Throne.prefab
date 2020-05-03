@@ -80,7 +80,7 @@
     "node": {
       "__id__": 1
     },
-    "_enabled": true,
+    "_enabled": false,
     "_materials": [
       {
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
@@ -111,7 +111,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "190c7e73-1888-4e6e-9647-4639d9498944"
     },
     "fileId": "07QPHAijNLaLxm4m1N9AVC",
     "sync": false
