@@ -174,7 +174,7 @@
       "array": [
         0,
         0,
-        566.3719208558726,
+        572.4427919015139,
         0,
         0,
         0,
@@ -2185,7 +2185,7 @@
       "__id__": 54
     },
     "_enabled": true,
-    "canSwim": false,
+    "canSwim": true,
     "value": 1,
     "_id": "b32Hf6vEVNhZXBo+Vox1lG"
   },
@@ -4398,7 +4398,7 @@
       "__id__": 121
     },
     "_enabled": true,
-    "canSwim": false,
+    "canSwim": true,
     "value": 1,
     "_id": "daKSaV6YJHTYyT5HF/yPdu"
   },
@@ -5016,7 +5016,7 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        0,
+        -1,
         -256,
         0,
         0,
