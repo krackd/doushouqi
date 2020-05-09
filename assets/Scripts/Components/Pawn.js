@@ -47,7 +47,9 @@ cc.Class({
     },
 
     start() {
-        this.makeLabel();
+        if (this.player.displayValue) {
+            this.makeLabel();
+        }
     },
 
     onDestroy() {
@@ -126,7 +128,7 @@ cc.Class({
         valueBorder.setParent(this.node);
         valueBorder.setPosition(0, 0);
         valueBorder.setPosition(21, -21);
-        valueBorder.color = this.player.valueBorderColor;
+        valueBorder.color = this.player.color;
     },
 });
 

@@ -2901,15 +2901,9 @@
     "border": {
       "__uuid__": "3e373d28-3ed7-4843-bc4d-441ec195cde9"
     },
+    "displayValue": true,
     "valueBorder": {
       "__uuid__": "bd775afa-d909-4a98-85d3-c1df532a715f"
-    },
-    "valueBorderColor": {
-      "__type__": "cc.Color",
-      "r": 17,
-      "g": 62,
-      "b": 179,
-      "a": 255
     },
     "valueLabelColor": {
       "__type__": "cc.Color",
@@ -5128,15 +5122,9 @@
     "border": {
       "__uuid__": "3e373d28-3ed7-4843-bc4d-441ec195cde9"
     },
+    "displayValue": true,
     "valueBorder": {
       "__uuid__": "bd775afa-d909-4a98-85d3-c1df532a715f"
-    },
-    "valueBorderColor": {
-      "__type__": "cc.Color",
-      "r": 207,
-      "g": 42,
-      "b": 39,
-      "a": 255
     },
     "valueLabelColor": {
       "__type__": "cc.Color",
