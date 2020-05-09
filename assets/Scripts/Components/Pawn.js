@@ -84,7 +84,15 @@ cc.Class({
     },
 
     beats(pawn) {
-        return this.value > pawn.value || this.value == 1 && pawn.value == 8;
+        return this.value >= pawn.value && !this.isElephantVsRat(pawn) || this.isRatVsElephant(pawn);
+    },
+
+    isElephantVsRat(pawn) {
+        return this.value == 8 && pawn.value == 1;
+    },
+
+    isRatVsElephant(pawn) {
+        return this.value == 1 && pawn.value == 8;
     },
 
     getPositionVec2() {
