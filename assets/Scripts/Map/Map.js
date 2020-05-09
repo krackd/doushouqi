@@ -22,18 +22,32 @@ cc.Class({
 
     // update (dt) {},
 
-    isGroundCollision(locationInView) {
+    isGroundCollisionView(locationInView) {
         return this.isCollision(
             this.tilemap
                 .getLayer("Collisions")
                 .getTileGIDAt(this.getTilePosition(locationInView)));
     },
 
-    isWaterCollision(locationInView) {
+    isWaterCollisionView(locationInView) {
         return this.isCollision(
             this.tilemap
                 .getLayer("WaterCollisions")
                 .getTileGIDAt(this.getTilePosition(locationInView)));
+    },
+
+    isGroundCollisionWorld(pos) {
+        return this.isCollision(
+            this.tilemap
+                .getLayer("Collisions")
+                .getTileGIDAt(this.getTilePositionFromPosition(pos)));
+    },
+
+    isWaterCollisionWorld(pos) {
+        return this.isCollision(
+            this.tilemap
+                .getLayer("WaterCollisions")
+                .getTileGIDAt(this.getTilePositionFromPosition(pos)));
     },
 
     getTilePosition(locationInView) {

@@ -60,40 +60,59 @@ cc.Class({
             return;
         }
 
-        if (this.map.isGroundCollision(event.getLocationInView())) {
+        if (this.map.isGroundCollisionView(event.getLocationInView())) {
             return;
         }
 
-        if (!pawn.canSwim && this.map.isWaterCollision(event.getLocationInView())) {
+        if (!pawn.canSwim && this.map.isWaterCollisionView(event.getLocationInView())) {
             return;
         }
 
-        var selectedPos = this.map.getPawnPosition(pawn);
-        var tilePos = this.map.getTilePosition(event.getLocationInView());
-        if (Utils.isSame(selectedPos, tilePos)) {
+        var currentTilePos = this.map.getPawnPosition(pawn);
+        var targetTilePos = this.map.getTilePosition(event.getLocationInView());
+        if (Utils.isSame(currentTilePos, targetTilePos)) {
             return;
         }
 
-        var target = this.map.getPositionFromTilePosition(tilePos);
-        var distance = tilePos.sub(selectedPos).magSqr();
+        var targetPos = this.map.getPositionFromTilePosition(targetTilePos);
+        var distance = targetTilePos.sub(currentTilePos).magSqr();
 
-        var opponentPawn = this.getOpponent(target);
-        if (distance <= 1 && (opponentPawn === undefined || pawn.beats(opponentPawn))) {
-            this.selected = null;
-
-            pawn.moveTo(target);
-            pawn.resetBorderColor();
-            
-            
-            if (opponentPawn !== undefined) {
-                cc.log("Removing pawn");
-                opponentPawn.destroyPawn();
-            }
-
-            // Next player
-            this.currentPlayerIndex = ++this.currentPlayerIndex % this.players.length;
-            this.currentPlayer = this.players[this.currentPlayerIndex];
+        // Orthogonal moves only, one cell at a time
+        if (distance > 1) {
+            return;
         }
+        
+        var opponentPawn = this.getOpponent(targetPos);
+        // If cannot beat the opponent pawn
+        if (opponentPawn !== undefined && !pawn.beats(opponentPawn)) {
+            return;
+        }
+
+        var currentPos = this.map.getPositionFromTilePosition(currentTilePos);
+        // If exiting the water and attacking a grounded opponent
+        if (opponentPawn !== undefined && pawn.value != opponentPawn.value && this.map.isWaterCollisionWorld(currentPos) && !this.map.isWaterCollisionWorld(targetPos)) {
+            return;
+        }
+
+        // If entering a trap: reduce the value to 0
+        // If exiting a trap: restore the pawn value
+        // If entering opponent throne: win
+
+        // Else: can move to selected cell
+        this.selected = null;
+
+        pawn.moveTo(targetPos);
+        pawn.resetBorderColor();
+        
+        
+        if (opponentPawn !== undefined) {
+            cc.log("Removing pawn");
+            opponentPawn.destroyPawn();
+        }
+
+        // Next player
+        this.currentPlayerIndex = ++this.currentPlayerIndex % this.players.length;
+        this.currentPlayer = this.players[this.currentPlayerIndex];
 
     },
 
