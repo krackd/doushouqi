@@ -81,6 +81,7 @@
       "__id__": 1
     },
     "_enabled": true,
+    "playerIndex": 0,
     "color": {
       "__type__": "cc.Color",
       "r": 0,
@@ -94,6 +95,13 @@
     "valueBorder": {
       "__uuid__": "bd775afa-d909-4a98-85d3-c1df532a715f"
     },
+    "valueBorderColor": {
+      "__type__": "cc.Color",
+      "r": 207,
+      "g": 42,
+      "b": 39,
+      "a": 255
+    },
     "shadow": {
       "__uuid__": "e5a25c1e-b92e-430a-b196-940325e347d0"
     },
@@ -102,6 +110,7 @@
       "x": 0,
       "y": 0.2
     },
+    "flip": false,
     "_id": ""
   },
   {

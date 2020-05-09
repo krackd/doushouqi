@@ -174,7 +174,7 @@
       "array": [
         0,
         0,
-        572.4427919015139,
+        570.7107410939451,
         0,
         0,
         0,
@@ -2893,9 +2893,9 @@
     "playerIndex": 0,
     "color": {
       "__type__": "cc.Color",
-      "r": 0,
-      "g": 0,
-      "b": 255,
+      "r": 17,
+      "g": 62,
+      "b": 179,
       "a": 255
     },
     "border": {
@@ -2903,6 +2903,20 @@
     },
     "valueBorder": {
       "__uuid__": "bd775afa-d909-4a98-85d3-c1df532a715f"
+    },
+    "valueBorderColor": {
+      "__type__": "cc.Color",
+      "r": 17,
+      "g": 62,
+      "b": 179,
+      "a": 255
+    },
+    "valueLabelColor": {
+      "__type__": "cc.Color",
+      "r": 255,
+      "g": 255,
+      "b": 255,
+      "a": 255
     },
     "shadow": {
       "__uuid__": "e5a25c1e-b92e-430a-b196-940325e347d0"
@@ -5106,9 +5120,9 @@
     "playerIndex": 1,
     "color": {
       "__type__": "cc.Color",
-      "r": 255,
-      "g": 0,
-      "b": 0,
+      "r": 207,
+      "g": 42,
+      "b": 39,
       "a": 255
     },
     "border": {
@@ -5116,6 +5130,20 @@
     },
     "valueBorder": {
       "__uuid__": "bd775afa-d909-4a98-85d3-c1df532a715f"
+    },
+    "valueBorderColor": {
+      "__type__": "cc.Color",
+      "r": 207,
+      "g": 42,
+      "b": 39,
+      "a": 255
+    },
+    "valueLabelColor": {
+      "__type__": "cc.Color",
+      "r": 255,
+      "g": 255,
+      "b": 255,
+      "a": 255
     },
     "shadow": {
       "__uuid__": "e5a25c1e-b92e-430a-b196-940325e347d0"

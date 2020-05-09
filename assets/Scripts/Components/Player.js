@@ -17,6 +17,9 @@ cc.Class({
             default: null,
             type: cc.Prefab
         },
+
+        valueBorderColor: cc.Color.BLACK,
+        valueLabelColor: cc.Color.WHITE,
         
         shadow: {
             default: null,

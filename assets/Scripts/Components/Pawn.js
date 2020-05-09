@@ -113,18 +113,20 @@ cc.Class({
         var labelNode = new cc.Node();
 
         this.label = labelNode.addComponent(cc.Label);
-        this.label.string = this.value.toString();
-        this.label.fontSize = 12;
-        this.label.fontFamilty = "Impact";
+        this.label.fontFamilty = "Arial Black";
+        this.label.fontSize = 10;
+        this.label.useSystemFont = true;
         this.label.enableBold = true;
+        this.label.string = this.value.toString();
 
         labelNode.setParent(valueBorder);
-        labelNode.color = cc.Color.BLACK;
-        labelNode.setPosition(0, -19);
+        labelNode.color = this.player.valueLabelColor;
+        labelNode.setPosition(0, -19.5);
 
         valueBorder.setParent(this.node);
         valueBorder.setPosition(0, 0);
-        valueBorder.setPosition(-21, -21);
+        valueBorder.setPosition(21, -21);
+        valueBorder.color = this.player.valueBorderColor;
     },
 });
 
