@@ -78,7 +78,7 @@ cc.Class({
         var distance = tilePos.sub(selectedPos).magSqr();
 
         var opponentPawn = this.getOpponent(target);
-        if (distance <= 2 && (opponentPawn === undefined || pawn.beats(opponentPawn))) {
+        if (distance <= 1 && (opponentPawn === undefined || pawn.beats(opponentPawn))) {
             this.selected = null;
 
             pawn.moveTo(target);
