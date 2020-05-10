@@ -736,8 +736,8 @@
       }
     ],
     "_useOriginalSize": false,
-    "_string": "Player Wins!",
-    "_N$string": "Player Wins!",
+    "_string": "Joueur gagne !",
+    "_N$string": "Joueur gagne !",
     "_fontSize": 40,
     "_lineHeight": 40,
     "_enableWrapText": true,
@@ -4756,7 +4756,7 @@
       "__id__": 55
     },
     "_enabled": true,
-    "playerName": "Blue",
+    "playerName": "Bleu",
     "playerIndex": 0,
     "color": {
       "__type__": "cc.Color",
@@ -6978,7 +6978,7 @@
       "__id__": 122
     },
     "_enabled": true,
-    "playerName": "Red",
+    "playerName": "Rouge",
     "playerIndex": 1,
     "color": {
       "__type__": "cc.Color",

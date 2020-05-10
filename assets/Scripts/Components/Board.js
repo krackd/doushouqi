@@ -112,7 +112,6 @@ cc.Class({
         pawn.resetBorderColor();
         
         if (opponentPawn !== undefined) {
-            cc.log("Removing pawn");
             opponentPawn.destroyPawn();
         }
 
@@ -121,7 +120,7 @@ cc.Class({
 
         var throne = this.getOpponentThrone(targetPos);
         if (throne !== undefined) {
-            var msg = this.currentPlayer.getName() + " Wins!";
+            var msg = this.currentPlayer.getName() + " gagne !";
             this.winMsg.string = msg;
             this.winMsg.node.active = true;
             this.winMsg.node.color = this.currentPlayer.color;
