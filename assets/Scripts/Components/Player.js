@@ -40,8 +40,8 @@ cc.Class({
 
     start() {
         this.pawns = this.node.getComponentsInChildren("Pawn");
-        this.traps = this.node.getParent().getComponentsInChildren("Trap");
-        this.throne = this.node.getParent().getComponentInChildren("Throne");
+        this.traps = this.node.getComponentsInChildren("Trap");
+        this.throne = this.node.getComponentInChildren("Throne");
         this.initPawns();
     },
 

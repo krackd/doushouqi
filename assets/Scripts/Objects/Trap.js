@@ -12,7 +12,6 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
-        playerIndex: 0,
     },
 
     isPlayer(index) {
