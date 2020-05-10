@@ -62,46 +62,13 @@ cc.Class({
         }
 
         var pawn = this.selected;
-
         if (pawn == null) {
             return;
         }
 
-        if (this.map.isGroundCollisionView(event.getLocationInView())) {
-            return;
-        }
+        var context = this.makeContext(event, pawn);
 
-        if (!pawn.canSwim && this.map.isWaterCollisionView(event.getLocationInView())) {
-            return;
-        }
-
-        var currentTilePos = this.map.getPawnPosition(pawn);
-        var targetTilePos = this.map.getTilePosition(event.getLocationInView());
-        if (Utils.isSame(currentTilePos, targetTilePos)) {
-            return;
-        }
-
-        var targetPos = this.map.getPositionFromTilePosition(targetTilePos);
-        var distance = this.distanceSqr(currentTilePos, targetTilePos);
-
-        // Orthogonal moves only, one cell at a time
-        if (distance > 1 && !this.canWaterJump(currentTilePos, targetTilePos, pawn)) {
-            return;
-        }
-        
-        var opponentPawn = this.getOpponentPawn(targetPos);
-        // If cannot beat the opponent pawn
-        if (opponentPawn !== undefined && !pawn.beats(opponentPawn)) {
-            return;
-        }
-
-        var currentPos = this.map.getPositionFromTilePosition(currentTilePos);
-        // If exiting the water and attacking a grounded opponent
-        if (opponentPawn !== undefined && pawn.value != opponentPawn.value && this.map.isWaterCollisionWorld(currentPos) && !this.map.isWaterCollisionWorld(targetPos)) {
-            return;
-        }
-
-        if (this.isPlayerThroneTiled(targetTilePos)) {
+        if (!this.canMove(context)) {
             return;
         }
 
@@ -112,30 +79,83 @@ cc.Class({
         // Else: can move to selected cell
         this.selected = null;
 
-        pawn.moveTo(targetPos);
+        pawn.moveTo(context.targetPos);
         pawn.resetBorderColor();
         
-        if (opponentPawn !== undefined) {
-            opponentPawn.destroyPawn();
+        if (context.opponentPawn !== undefined) {
+            context.opponentPawn.destroyPawn();
         }
 
-        var trap = this.getOpponentTrap(targetPos);
+        var trap = this.getOpponentTrap(context.targetPos);
         pawn.setValue(trap !== undefined ? 0 : pawn.getInitialValue());
 
-        var throne = this.getOpponentThrone(targetPos);
+        var throne = this.getOpponentThrone(context.targetPos);
         if (throne !== undefined) {
             var msg = this.currentPlayer.getName() + " gagne !";
             this.winMsg.string = msg;
             this.winMsg.node.active = true;
             this.winMsg.node.color = this.currentPlayer.color;
             this.gameOver = true;
-            cc.log(msg);
         }
 
         // Next player
         this.currentPlayerIndex = ++this.currentPlayerIndex % this.players.length;
         this.currentPlayer = this.players[this.currentPlayerIndex];
 
+    },
+
+    makeContext(event, pawn) {
+        var locationInView = event.getLocationInView();
+        var targetTilePos = this.map.getTilePosition(event.getLocationInView());
+        var targetPos = this.map.getPositionFromTilePosition(targetTilePos);
+        var currentTilePos = this.map.getPawnPosition(pawn);
+        var currentPos = this.map.getPositionFromTilePosition(currentTilePos);
+        var distance = this.distanceSqr(currentTilePos, targetTilePos);
+        var opponentPawn = this.getOpponentPawn(targetPos);
+
+        return {
+            pawn: pawn,
+            locationInView: locationInView,
+            targetTilePos: targetTilePos,
+            targetPos: targetPos,
+            currentTilePos: currentTilePos,
+            currentPos: currentPos,
+            distance: distance,
+            opponentPawn: opponentPawn,
+        };
+    },
+
+    canMove(context) {
+        // If target is out of board ground cell
+        if (this.map.isGroundCollisionView(context.locationInView)) {
+            return false;
+        }
+        // If target is a water cell and selected pawn cannot swim
+        if (!context.pawn.canSwim && this.map.isWaterCollisionView(context.locationInView)) {
+            return false;
+        }
+        // If clicked the same cell
+        if (Utils.isSame(context.currentTilePos, context.targetTilePos)) {
+            return false;
+        }
+        // Orthogonal moves only, one cell at a time, or water jump
+        if (context.distance > 1 && !this.canWaterJump(context.currentTilePos, context.targetTilePos, context.pawn)) {
+            return false;
+        }
+        // If cannot beat the opponent pawn
+        if (context.opponentPawn !== undefined && !context.pawn.beats(context.opponentPawn)) {
+            return false;
+        }
+        // If exiting the water and attacking a grounded opponent
+        if (context.opponentPawn !== undefined && context.pawn.value != context.opponentPawn.value && this.map.isWaterCollisionWorld(context.currentPos) && !this.map.isWaterCollisionWorld(context.targetPos)) {
+            return false;
+        }
+        // If attempting to move on player throne
+        if (this.isPlayerThroneTiled(context.targetTilePos)) {
+            return false;
+        }
+
+        return true;
     },
 
     canWaterJump(from, to, pawn) {
