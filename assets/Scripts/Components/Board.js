@@ -66,7 +66,8 @@ cc.Class({
             return;
         }
 
-        var context = this.makeContext(event, pawn);
+        var targetTilePos = this.map.getTilePosition(event.getLocationInView());
+        var context = this.makeContext(targetTilePos, pawn);
 
         if (!this.canMove(context)) {
             return;
@@ -104,9 +105,7 @@ cc.Class({
 
     },
 
-    makeContext(event, pawn) {
-        var locationInView = event.getLocationInView();
-        var targetTilePos = this.map.getTilePosition(event.getLocationInView());
+    makeContext(targetTilePos, pawn) {
         var targetPos = this.map.getPositionFromTilePosition(targetTilePos);
         var currentTilePos = this.map.getPawnPosition(pawn);
         var currentPos = this.map.getPositionFromTilePosition(currentTilePos);
@@ -115,7 +114,6 @@ cc.Class({
 
         return {
             pawn: pawn,
-            locationInView: locationInView,
             targetTilePos: targetTilePos,
             targetPos: targetPos,
             currentTilePos: currentTilePos,
@@ -127,11 +125,11 @@ cc.Class({
 
     canMove(context) {
         // If target is out of board ground cell
-        if (this.map.isGroundCollisionView(context.locationInView)) {
+        if (this.map.isGroundCollisionTiled(context.targetTilePos)) {
             return false;
         }
         // If target is a water cell and selected pawn cannot swim
-        if (!context.pawn.canSwim && this.map.isWaterCollisionView(context.locationInView)) {
+        if (!context.pawn.canSwim && this.map.isWaterCollisionTiled(context.targetTilePos)) {
             return false;
         }
         // If clicked the same cell
@@ -147,7 +145,7 @@ cc.Class({
             return false;
         }
         // If exiting the water and attacking a grounded opponent
-        if (context.opponentPawn !== undefined && context.pawn.value != context.opponentPawn.value && this.map.isWaterCollisionWorld(context.currentPos) && !this.map.isWaterCollisionWorld(context.targetPos)) {
+        if (context.opponentPawn !== undefined && context.pawn.value != context.opponentPawn.value && this.map.isWaterCollisionTiled(context.currentTilePos) && !this.map.isWaterCollisionTiled(context.targetTilePos)) {
             return false;
         }
         // If attempting to move on player throne

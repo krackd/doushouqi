@@ -14,28 +14,8 @@ cc.Class({
     properties: {
     },
 
-    // onLoad () {},
-
     start () {
         this.tilemap = this.node.getComponent(cc.TiledMap);
-    },
-
-    // update (dt) {},
-
-    isGroundCollisionView(locationInView) {
-        return this.isGroundCollisionTiled(this.getTilePosition(locationInView));
-    },
-
-    isWaterCollisionView(locationInView) {
-        return this.isWaterCollisionTiled(this.getTilePosition(locationInView));
-    },
-
-    isGroundCollisionWorld(pos) {
-        return this.isGroundCollisionTiled(this.getTilePositionFromPosition(pos));
-    },
-
-    isWaterCollisionWorld(pos) {
-        return this.isWaterCollisionTiled(this.getTilePositionFromPosition(pos));
     },
 
     isGroundCollisionTiled(tilePos) {
