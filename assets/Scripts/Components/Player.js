@@ -14,6 +14,8 @@ cc.Class({
             type: cc.Prefab
         },
 
+        turnCircle: cc.Node,
+
         displayValue: true,
 
         valueBorder: {
@@ -35,6 +37,9 @@ cc.Class({
     // LIFE-CYCLE CALLBACKS:
 
     onLoad() {
+        this.turnCircle.color = this.color;
+        this.turnCircle.active = false;
+        
         this.map = this.node.getParent().getComponentInChildren("Map");
     },
 
@@ -43,6 +48,14 @@ cc.Class({
         this.traps = this.node.getComponentsInChildren("Trap");
         this.throne = this.node.getComponentInChildren("Throne");
         this.initPawns();
+    },
+
+    beginTurn() {
+        this.turnCircle.active = true;
+    },
+
+    endTurn() {
+        this.turnCircle.active = false;
     },
 
     hasPawn(pawn) {

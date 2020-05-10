@@ -43,6 +43,10 @@ cc.Class({
         this.node.on(cc.Node.EventType.MOUSE_DOWN, this.onMouseDown, this);
     },
 
+    start() {
+        this.currentPlayer.beginTurn();
+    },
+
     // update (dt) {},
 
     onSelect(pawn) {
@@ -100,9 +104,10 @@ cc.Class({
         }
 
         // Next player
+        this.currentPlayer.endTurn();
         this.currentPlayerIndex = ++this.currentPlayerIndex % this.players.length;
         this.currentPlayer = this.players[this.currentPlayerIndex];
-
+        this.currentPlayer.beginTurn();
     },
 
     makeContext(targetTilePos, pawn) {
