@@ -26,7 +26,9 @@ cc.Class({
 
         selectionColor: {
             default: cc.Color.GREEN
-        }
+        },
+
+        winMsg: cc.Label,
     },
 
     // onLoad () {},
@@ -36,6 +38,7 @@ cc.Class({
         this.players = this.node.getParent().getComponentsInChildren("Player");
         this.currentPlayerIndex = 0;
         this.currentPlayer = this.players[this.currentPlayerIndex];
+        this.gameOver = false;
 
         this.node.on(cc.Node.EventType.MOUSE_DOWN, this.onMouseDown, this);
     },
@@ -54,6 +57,10 @@ cc.Class({
     },
 
     onMouseDown(event) {
+        if (this.gameOver) {
+            return;
+        }
+
         var pawn = this.selected;
 
         if (pawn == null) {
@@ -82,7 +89,7 @@ cc.Class({
             return;
         }
         
-        var opponentPawn = this.getOpponent(targetPos);
+        var opponentPawn = this.getOpponentPawn(targetPos);
         // If cannot beat the opponent pawn
         if (opponentPawn !== undefined && !pawn.beats(opponentPawn)) {
             return;
@@ -104,10 +111,22 @@ cc.Class({
         pawn.moveTo(targetPos);
         pawn.resetBorderColor();
         
-        
         if (opponentPawn !== undefined) {
             cc.log("Removing pawn");
             opponentPawn.destroyPawn();
+        }
+
+        var trap = this.getOpponentTrap(targetPos);
+        pawn.setValue(trap !== undefined ? 0 : pawn.getInitialValue());
+
+        var throne = this.getOpponentThrone(targetPos);
+        if (throne !== undefined) {
+            var msg = this.currentPlayer.getName() + " Wins!";
+            this.winMsg.string = msg;
+            this.winMsg.node.active = true;
+            this.winMsg.node.color = this.currentPlayer.color;
+            this.gameOver = true;
+            cc.log(msg);
         }
 
         // Next player
@@ -137,7 +156,7 @@ cc.Class({
         var offset = to.sub(from).normalize();
         for (var i = from.add(offset); !Utils.isSame(i, to); i = i.add(offset)) {
             // In between cells must be water cells
-            if (!this.map.isWaterCollisionTiled(i) || this.getOpponentTiled(i) !== undefined) {
+            if (!this.map.isWaterCollisionTiled(i) || this.getOpponentPawnTiled(i) !== undefined) {
                 return false;
             }
         }
@@ -148,18 +167,50 @@ cc.Class({
         return to.sub(from).magSqr();
     },
 
-    getOpponent(pos) {
-        return this.getOpponentTiled(this.map.getTilePositionFromPosition(pos));
+    // Get opponent objects from world position
+
+    getOpponentPawn(pos) {
+        return this.getOpponentPawnTiled(this.map.getTilePositionFromPosition(pos));
     },
 
-    getOpponentTiled(tilePos) {
+    getOpponentTrap(pos) {
+        return this.getOpponentTrapTiled(this.map.getTilePositionFromPosition(pos));
+    },
+
+    getOpponentThrone(pos) {
+        return this.getOpponentThroneTiled(this.map.getTilePositionFromPosition(pos));
+    },
+
+    // Get opponent objects from tiled position
+
+    getOpponentPawnTiled(tilePos) {
         return this.players
-        .filter(player => player !== this.currentPlayer)
-        .flatMap(player => player.getPawns())
-        .find(p => {
-            var pawnTilePos = this.map.getTilePositionFromPosition(p.node.getPosition());
-            return pawnTilePos.x == tilePos.x && pawnTilePos.y == tilePos.y;
-        });
+            .filter(player => player !== this.currentPlayer)
+            .flatMap(player => player.getPawns())
+            .find(p => {
+                var pawnTilePos = this.map.getTilePositionFromPosition(p.node.getPosition());
+                return pawnTilePos.x == tilePos.x && pawnTilePos.y == tilePos.y;
+            });
+    },
+
+    getOpponentTrapTiled(tilePos) {
+        return this.players
+            .filter(player => player !== this.currentPlayer)
+            .flatMap(player => player.getTraps())
+            .find(t => {
+                var trapTilePos = this.map.getTilePositionFromPosition(t.node.getPosition());
+                return trapTilePos.x == tilePos.x && trapTilePos.y == tilePos.y;
+            });
+    },
+
+    getOpponentThroneTiled(tilePos) {
+        return this.players
+            .filter(player => player !== this.currentPlayer)
+            .map(player => player.getThrone())
+            .find(t => {
+                var throneTilePos = this.map.getTilePositionFromPosition(t.node.getPosition());
+                return throneTilePos.x == tilePos.x && throneTilePos.y == tilePos.y;
+            });
     },
 
 });

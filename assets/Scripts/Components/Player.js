@@ -2,6 +2,7 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
+        playerName: "Red",
         playerIndex: 0,
 
         color: {
@@ -39,6 +40,8 @@ cc.Class({
 
     start() {
         this.pawns = this.node.getComponentsInChildren("Pawn");
+        this.traps = this.node.getParent().getComponentsInChildren("Trap");
+        this.throne = this.node.getParent().getComponentInChildren("Throne");
         this.initPawns();
     },
 
@@ -75,6 +78,18 @@ cc.Class({
 
     getPawns() {
         return this.pawns;
+    },
+
+    getTraps() {
+        return this.traps;
+    },
+
+    getThrone() {
+        return this.throne;
+    },
+
+    getName() {
+        return this.playerName;
     },
 
     removePawn(pawn) {

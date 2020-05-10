@@ -50,6 +50,8 @@ cc.Class({
         if (this.player.displayValue) {
             this.makeLabel();
         }
+
+        this.initialValue = this.value;
     },
 
     onDestroy() {
@@ -99,6 +101,15 @@ cc.Class({
         var pawnPos3d = this.node.getPosition();
         var pawnPos2d = new cc.Vec2(pawnPos3d.x, pawnPos3d.y);
         return pawnPos2d;
+    },
+
+    getInitialValue() {
+        return this.initialValue;
+    },
+
+    setValue(val) {
+        this.value = val;
+        this.label.string = this.value.toString();
     },
 
     moveTo(target) {
