@@ -101,6 +101,10 @@ cc.Class({
             return;
         }
 
+        if (this.isPlayerThroneTiled(targetTilePos)) {
+            return;
+        }
+
         // If entering a trap: reduce the value to 0
         // If exiting a trap: restore the pawn value
         // If entering opponent throne: win
@@ -210,6 +214,12 @@ cc.Class({
                 var throneTilePos = this.map.getTilePositionFromPosition(t.node.getPosition());
                 return throneTilePos.x == tilePos.x && throneTilePos.y == tilePos.y;
             });
+    },
+
+    isPlayerThroneTiled(tilePos) {
+        var throne = this.currentPlayer.getThrone();
+        var throneTilePos = this.map.getTilePositionFromPosition(throne.node.getPosition());
+        return throneTilePos.x == tilePos.x && throneTilePos.y == tilePos.y;
     },
 
 });
