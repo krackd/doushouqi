@@ -75,10 +75,10 @@ cc.Class({
         }
 
         var targetPos = this.map.getPositionFromTilePosition(targetTilePos);
-        var distance = targetTilePos.sub(currentTilePos).magSqr();
+        var distance = this.distanceSqr(currentTilePos, targetTilePos);
 
         // Orthogonal moves only, one cell at a time
-        if (distance > 1) {
+        if (distance > 1 && !this.canWaterJump(currentTilePos, targetTilePos, pawn)) {
             return;
         }
         
@@ -116,14 +116,50 @@ cc.Class({
 
     },
 
-    getOpponent(pos) {
-        var tilePos = this.map.getTilePositionFromPosition(pos);
-        return this.players
-            .filter(player => player !== this.currentPlayer)
-            .flatMap(player => player.getPawns())
-            .find(p => {
-                var pawnTilePos = this.map.getTilePositionFromPosition(p.node.getPosition());
-                return pawnTilePos.x == tilePos.x && pawnTilePos.y == tilePos.y;
-            });
+    canWaterJump(from, to, pawn) {
+        // Only tiger and lion can water jump
+        if (pawn.value != 6 && pawn.value != 7) {
+            return false;
+        }
+
+        // First and last cell must be ground cells
+        var isFromToValid =
+            (from.x === to.x || from.y === to.y)
+            && !this.map.isWaterCollisionTiled(from)
+            && !this.map.isWaterCollisionTiled(to)
+        ;
+
+        if (!isFromToValid) {
+            return false;
+        }
+
+        // In between cells must be free of opponent pawn
+        var offset = to.sub(from).normalize();
+        for (var i = from.add(offset); !Utils.isSame(i, to); i = i.add(offset)) {
+            // In between cells must be water cells
+            if (!this.map.isWaterCollisionTiled(i) || this.getOpponentTiled(i) !== undefined) {
+                return false;
+            }
+        }
+        return true;
     },
+
+    distanceSqr(from, to) {
+        return to.sub(from).magSqr();
+    },
+
+    getOpponent(pos) {
+        return this.getOpponentTiled(this.map.getTilePositionFromPosition(pos));
+    },
+
+    getOpponentTiled(tilePos) {
+        return this.players
+        .filter(player => player !== this.currentPlayer)
+        .flatMap(player => player.getPawns())
+        .find(p => {
+            var pawnTilePos = this.map.getTilePositionFromPosition(p.node.getPosition());
+            return pawnTilePos.x == tilePos.x && pawnTilePos.y == tilePos.y;
+        });
+    },
+
 });

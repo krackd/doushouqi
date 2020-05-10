@@ -23,31 +23,35 @@ cc.Class({
     // update (dt) {},
 
     isGroundCollisionView(locationInView) {
-        return this.isCollision(
-            this.tilemap
-                .getLayer("Collisions")
-                .getTileGIDAt(this.getTilePosition(locationInView)));
+        return this.isGroundCollisionTiled(this.getTilePosition(locationInView));
     },
 
     isWaterCollisionView(locationInView) {
-        return this.isCollision(
-            this.tilemap
-                .getLayer("WaterCollisions")
-                .getTileGIDAt(this.getTilePosition(locationInView)));
+        return this.isWaterCollisionTiled(this.getTilePosition(locationInView));
     },
 
     isGroundCollisionWorld(pos) {
-        return this.isCollision(
-            this.tilemap
-                .getLayer("Collisions")
-                .getTileGIDAt(this.getTilePositionFromPosition(pos)));
+        return this.isGroundCollisionTiled(this.getTilePositionFromPosition(pos));
     },
 
     isWaterCollisionWorld(pos) {
+        return this.isWaterCollisionTiled(this.getTilePositionFromPosition(pos));
+    },
+
+    isGroundCollisionTiled(tilePos) {
+        return this.isCollision(
+            this.tilemap
+                .getLayer("Collisions")
+                .getTileGIDAt(tilePos)
+        );
+    },
+
+    isWaterCollisionTiled(tilePos) {
         return this.isCollision(
             this.tilemap
                 .getLayer("WaterCollisions")
-                .getTileGIDAt(this.getTilePositionFromPosition(pos)));
+                .getTileGIDAt(tilePos)
+        );
     },
 
     getTilePosition(locationInView) {
