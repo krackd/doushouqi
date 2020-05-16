@@ -112,8 +112,8 @@ cc.Class({
         this.label.string = this.value.toString();
     },
 
-    moveTo(target) {
-        this.node.runAction(cc.moveTo(MOVE_DURATION, target));
+    createMoveTween(target) {
+        return cc.tween(this.node).to(MOVE_DURATION, { position: target });
     },
 
     setBorderColor(color) {

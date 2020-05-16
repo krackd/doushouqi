@@ -84,7 +84,7 @@ cc.Class({
         // Else: can move to selected cell
         this.selected = null;
 
-        pawn.moveTo(context.targetPos);
+        var moveTween = pawn.createMoveTween(context.targetPos);
         pawn.resetBorderColor();
         
         if (context.opponentPawn !== undefined) {
@@ -96,11 +96,15 @@ cc.Class({
 
         var throne = this.getOpponentThrone(context.targetPos);
         if (throne !== undefined) {
-            var msg = this.currentPlayer.getName() + " gagne !";
-            this.winMsg.string = msg;
-            this.winMsg.node.active = true;
-            this.winMsg.node.color = this.currentPlayer.color;
-            this.gameOver = true;
+            // current player wins
+            this.win(this.currentPlayer);
+        }
+
+        // Check current player draw
+        this.checkDraw(this.currentPlayer);
+
+        if (this.gameOver) {
+            return;
         }
 
         // Next player
@@ -108,6 +112,37 @@ cc.Class({
         this.currentPlayerIndex = ++this.currentPlayerIndex % this.players.length;
         this.currentPlayer = this.players[this.currentPlayerIndex];
         this.currentPlayer.beginTurn();
+
+        // Check opponent draw after move is done
+        moveTween.call(() => {
+            // wait the end of move tween to check opponent drawness
+            this.checkDraw(this.currentPlayer)
+        })
+        .start();
+    },
+
+    checkDraw(player) {
+        if (this.noMoreMove(player)) {
+            // Enemy wins
+            // (to be change if more than 2 players, in this case just loose)
+            this.draw()
+        }
+    },
+
+    win(winner) {
+        var msg = winner.getName() + " gagne !";
+        this.winMsg.string = msg;
+        this.winMsg.node.active = true;
+        this.winMsg.node.color = winner.color;
+        this.gameOver = true;
+    },
+
+    draw() {
+        var msg = "Match Nul !";
+        this.winMsg.string = msg;
+        this.winMsg.node.active = true;
+        this.winMsg.node.color = cc.Color.WHITE;
+        this.gameOver = true;
     },
 
     makeContext(targetTilePos, pawn) {
@@ -115,7 +150,7 @@ cc.Class({
         var currentTilePos = this.map.getPawnPosition(pawn);
         var currentPos = this.map.getPositionFromTilePosition(currentTilePos);
         var distance = this.distanceSqr(currentTilePos, targetTilePos);
-        var opponentPawn = this.getOpponentPawn(targetPos);
+        var opponentPawn = this.getOpponentPawnTiled(targetTilePos);
 
         return {
             pawn: pawn,
@@ -159,6 +194,28 @@ cc.Class({
         }
 
         return true;
+    },
+
+    noMoreMove(player) {
+        const pawns = player.getPawns();
+        for (let i = 0; i < pawns.length; i++) {
+            const pawn = pawns[i];
+            const moves = this.getMoveTiles(pawn);
+            for (let j = 0; j < moves.length; j++) {
+                const move = moves[j];
+                var context = this.makeContext(move, pawn);
+                if (this.canMove(context)) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    },
+
+    getMoveTiles(pawn) {
+        var pawnPos = this.map.getTilePositionFromPosition(pawn.getPositionVec2());
+        return [pawnPos.add(cc.Vec2.UP), pawnPos.add(cc.Vec2.RIGHT), pawnPos.add(cc.Vec2.RIGHT.mul(-1)), pawnPos.add(cc.Vec2.UP.mul(-1))];
     },
 
     canWaterJump(from, to, pawn) {
