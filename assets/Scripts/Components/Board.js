@@ -103,22 +103,22 @@ cc.Class({
         // Check current player draw
         this.checkDraw(this.currentPlayer);
 
-        if (this.gameOver) {
-            return;
+        if (!this.gameOver) {
+            // Next player
+            this.currentPlayer.endTurn();
+            this.currentPlayerIndex = ++this.currentPlayerIndex % this.players.length;
+            this.currentPlayer = this.players[this.currentPlayerIndex];
+            this.currentPlayer.beginTurn();
+    
+            // Check opponent draw after move is done
+            moveTween = moveTween.call(() => {
+                // wait the end of move tween to check opponent drawness
+                this.checkDraw(this.currentPlayer)
+            });
         }
 
-        // Next player
-        this.currentPlayer.endTurn();
-        this.currentPlayerIndex = ++this.currentPlayerIndex % this.players.length;
-        this.currentPlayer = this.players[this.currentPlayerIndex];
-        this.currentPlayer.beginTurn();
-
-        // Check opponent draw after move is done
-        moveTween.call(() => {
-            // wait the end of move tween to check opponent drawness
-            this.checkDraw(this.currentPlayer)
-        })
-        .start();
+        // Start the move
+        moveTween.start();
     },
 
     checkDraw(player) {
@@ -239,7 +239,7 @@ cc.Class({
         var offset = to.sub(from).normalize();
         for (var i = from.add(offset); !Utils.isSame(i, to); i = i.add(offset)) {
             // In between cells must be water cells
-            if (!this.map.isWaterCollisionTiled(i) || this.getOpponentPawnTiled(i) !== undefined) {
+            if (!this.map.isWaterCollisionTiled(i) || this.getAnyPawnTiled(i) !== undefined) {
                 return false;
             }
         }
@@ -295,6 +295,19 @@ cc.Class({
                 return throneTilePos.x == tilePos.x && throneTilePos.y == tilePos.y;
             });
     },
+
+    // Any objects from tiled position
+
+    getAnyPawnTiled(tilePos) {
+        return this.players
+            .flatMap(player => player.getPawns())
+            .find(p => {
+                var pawnTilePos = this.map.getTilePositionFromPosition(p.node.getPosition());
+                return pawnTilePos.x == tilePos.x && pawnTilePos.y == tilePos.y;
+            });
+    },
+
+    // Player objects from tiled position
 
     isPlayerThroneTiled(tilePos) {
         var throne = this.currentPlayer.getThrone();
