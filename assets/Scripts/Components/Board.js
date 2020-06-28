@@ -29,16 +29,6 @@ cc.Class({
         },
 
         winMsg: cc.Label,
-
-        moveHighlight: {
-            default: null,
-            type: cc.Prefab
-        },
-
-        lastMovesNode: {
-            default: null,
-            type: cc.Node
-        }
     },
 
     // onLoad () {},
@@ -61,7 +51,7 @@ cc.Class({
 
     onSelect(pawn) {
         if (this.currentPlayer.hasPawn(pawn)) {
-            if (this.selected != undefined) {
+            if (this.selected != null) {
                 this.selected.resetBorderColor();
             }
 
@@ -76,7 +66,7 @@ cc.Class({
         }
 
         var pawn = this.selected;
-        if (pawn == undefined) {
+        if (pawn == null) {
             return;
         }
 
@@ -91,12 +81,8 @@ cc.Class({
         // If exiting a trap: restore the pawn value
         // If entering opponent throne: win
 
-        // Making move highlighted tiles
-        this.clearHighlights();
-        this.makeHighlights(this.moveHighlight, context.currentPos, context.targetPos);
-
         // Else: can move to selected cell
-        this.selected = undefined;
+        this.selected = null;
 
         var moveTween = pawn.createMoveTween(context.targetPos);
         pawn.resetBorderColor();
@@ -139,7 +125,7 @@ cc.Class({
         if (this.noMoreMove(player)) {
             // Enemy wins
             // (to be change if more than 2 players, in this case just loose)
-            this.draw();
+            this.draw()
         }
     },
 
@@ -328,24 +314,5 @@ cc.Class({
         var throneTilePos = this.map.getTilePositionFromPosition(throne.node.getPosition());
         return throneTilePos.x == tilePos.x && throneTilePos.y == tilePos.y;
     },
-
-    // Move highlighted tiles
-
-    makeHighlights(prefab, from, to) {
-        this.makeHightlight(prefab, from);
-        this.makeHightlight(prefab, to);
-    },
-
-    makeHightlight(prefab, pos) {
-        var h = cc.instantiate(prefab);
-        h.setPosition(pos);
-        h.setParent(this.lastMovesNode);
-        return h;
-    },
-
-    clearHighlights() {
-        this.lastMovesNode.children
-            .forEach(child => child.destroy());
-    }
 
 });
