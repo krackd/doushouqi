@@ -4,50 +4,16 @@
   "_objFlags": 0,
   "_native": "",
   "_effectAsset": {
-    "__uuid__": "e2f00085-c597-422d-9759-52c360279106"
+    "__uuid__": "abc2cb62-7852-4525-a90d-d474487b88f2"
   },
-  "_defines": {
-    "USE_POSITION_SCALING": false,
-    "INPUT_IS_GAMMA": false,
-    "OUTPUT_TO_GAMMA": false,
-    "USE_OUTLINE_BASE_COLOR_MAP": false,
-    "USE_NORMAL_MAP": false,
-    "USE_BASE_COLOR_MAP": false,
-    "USE_SPECULAR_MAP": false,
-    "USE_EMISSIVE_MAP": false
-  },
+  "_defines": {},
   "_props": {
-    "lineWidth": 45,
-    "depthBias": 0,
-    "tilingOffset": {
-      "__type__": "cc.Vec4",
-      "x": 1,
-      "y": 1,
-      "z": 0,
-      "w": 0
-    },
-    "specular": {
+    "diffuseColor": {
       "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
+      "r": 119,
+      "g": 130,
       "b": 255,
-      "a": 127
-    },
-    "shadowColor": {
-      "__type__": "cc.Color",
-      "r": 82,
-      "g": 82,
-      "b": 82,
       "a": 255
-    },
-    "highlightColor": {
-      "__type__": "cc.Color",
-      "r": 213,
-      "g": 213,
-      "b": 213,
-      "a": 255
-    },
-    "lightThreshold": 0.8,
-    "lightSmoothness": 0.05
+    }
   }
 }

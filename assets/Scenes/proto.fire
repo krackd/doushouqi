@@ -7603,7 +7603,7 @@
       "b": 255,
       "a": 255
     },
-    "_intensity": 1,
+    "_intensity": 1.5,
     "_range": 1000,
     "_spotAngle": 60,
     "_spotExp": 1,
