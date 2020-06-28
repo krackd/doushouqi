@@ -7321,7 +7321,7 @@
       "width": 576,
       "height": 704
     },
-    "_fitWidth": false,
+    "_fitWidth": true,
     "_fitHeight": true,
     "_id": "24jg811TxPH4tbVAz1vfKG"
   }
