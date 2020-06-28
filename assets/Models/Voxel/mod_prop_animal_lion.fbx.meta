@@ -1,0 +1,157 @@
+{
+  "ver": "1.0.14",
+  "uuid": "ab05e864-4ed2-4b1c-a999-cee19d89c3f7",
+  "scaleFactor": 1,
+  "boneCount": 0,
+  "precomputeJointMatrix": false,
+  "animationFrameRate": 30,
+  "subMetas": {
+    "buffer.bin": {
+      "ver": "1.0.0",
+      "uuid": "ae7a1582-408e-42df-a228-4b68dd4689dc",
+      "subMetas": {}
+    },
+    "mod_prop_animal_lion.mesh": {
+      "ver": "1.0.1",
+      "uuid": "8590409d-5c60-4a06-881e-4a3b08d60550",
+      "verts": 664,
+      "tris": 424,
+      "submeshes": 1,
+      "minPos": {
+        "x": -0.489228427410126,
+        "y": 0,
+        "z": -0.81538051366806
+      },
+      "maxPos": {
+        "x": 0.652304649353027,
+        "y": 1.22307097911835,
+        "z": 0.570766508579254
+      },
+      "subMetas": {}
+    },
+    "mod_prop_animal_lion.prefab": {
+      "ver": "1.2.5",
+      "uuid": "139d3cbc-134b-4466-97c0-1a6c1173e8b6",
+      "optimizationPolicy": "AUTO",
+      "asyncLoadAssets": false,
+      "readonly": true,
+      "content": [
+        {
+          "__type__": "cc.Prefab",
+          "_name": "",
+          "_objFlags": 0,
+          "data": {
+            "__id__": 1
+          }
+        },
+        {
+          "__type__": "cc.Node",
+          "_name": "Sprite",
+          "_objFlags": 0,
+          "_opacity": 255,
+          "_color": {
+            "__type__": "cc.Color",
+            "r": 255,
+            "g": 255,
+            "b": 255,
+            "a": 255
+          },
+          "_cascadeOpacityEnabled": true,
+          "_parent": null,
+          "_anchorPoint": {
+            "__type__": "cc.Vec2",
+            "x": 0.5,
+            "y": 0.5
+          },
+          "_contentSize": {
+            "__type__": "cc.Size",
+            "width": 40,
+            "height": 36
+          },
+          "_children": [],
+          "_skewX": 0,
+          "_skewY": 0,
+          "_localZOrder": 0,
+          "_globalZOrder": 0,
+          "_tag": -1,
+          "_opacityModifyRGB": false,
+          "_reorderChildDirty": false,
+          "_id": "",
+          "_active": true,
+          "_components": [
+            {
+              "__id__": 2
+            }
+          ],
+          "_prefab": {
+            "__id__": 3
+          },
+          "_eulerAngles": {
+            "__type__": "cc.Vec3",
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "_trs": {
+            "__type__": "TypedArray",
+            "ctor": "Float64Array",
+            "array": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              1,
+              1,
+              1
+            ]
+          }
+        },
+        {
+          "__type__": "cc.Sprite",
+          "_name": "",
+          "_objFlags": 0,
+          "node": {
+            "__id__": 1
+          },
+          "_enabled": true,
+          "_spriteFrame": {
+            "__uuid__": "8cdb44ac-a3f6-449f-b354-7cd48cf84061"
+          },
+          "_type": 0,
+          "_sizeMode": 1,
+          "_fillType": 0,
+          "_fillCenter": {
+            "__type__": "cc.Vec2",
+            "x": 0,
+            "y": 0
+          },
+          "_fillStart": 0,
+          "_fillRange": 0,
+          "_isTrimmedMode": true,
+          "_srcBlendFactor": 770,
+          "_dstBlendFactor": 771,
+          "_atlas": null
+        },
+        {
+          "__type__": "cc.PrefabInfo",
+          "root": {
+            "__id__": 1
+          },
+          "asset": null,
+          "fileId": "d7118yAG5lKybkFOAh8koPL"
+        }
+      ],
+      "subMetas": {}
+    },
+    "material_world_pallette.mtl": {
+      "ver": "1.0.2",
+      "uuid": "ebb8e15c-fb5a-4db5-a367-f447128dc66c",
+      "dataAsSubAsset": "{\n  \"__type__\": \"cc.Material\",\n  \"_name\": \"\",\n  \"_objFlags\": 0,\n  \"_native\": \"\",\n  \"_effectAsset\": {\n    \"__uuid__\": \"abc2cb62-7852-4525-a90d-d474487b88f2\"\n  },\n  \"_defines\": {\n    \"USE_DIFFUSE_TEXTURE\": true\n  },\n  \"_props\": {\n    \"diffuseColor\": {\n      \"__type__\": \"cc.Color\",\n      \"r\": 204,\n      \"g\": 204,\n      \"b\": 204,\n      \"a\": 255\n    },\n    \"diffuseTexture\": {\n      \"__uuid__\": \"e886ef33-acba-4221-894d-21def0187d10\"\n    }\n  }\n}",
+      "name": "material_world_pallette.mtl",
+      "subMetas": {}
+    }
+  }
+}
